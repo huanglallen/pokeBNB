@@ -40,12 +40,24 @@ router.post('/', async (req, res, next) => {
 );
 
 // Log out
-router.delete(
-    '/',
-    (_req, res) => {
-      res.clearCookie('token');
-      return res.json({ message: 'success' });
-    }
-  );
+router.delete('/',(_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+});
+
+// Restore session user
+router.get('/', (req, res) => {
+    const { user } = req;
+    if (user) {
+        const safeUser = {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+        };
+        return res.json({
+            user: safeUser
+        });
+    } else return res.json({ user: null });
+});
 
 module.exports = router;
