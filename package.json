@@ -1,6 +1,26 @@
 {
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "express-validator": "^6.15.0"
-  }
+  "name": "authenticate-me",
+  "version": "1.0.0",
+  "description": "<!--!!START SILENT --> # AirBnB Clone <!--!!END --> <!--!!ADD --> <!-- # `<name of application here>` --> <!--!!END_ADD -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huanglallen/API-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huanglallen/API-project/issues"
+  },
+  "homepage": "https://github.com/huanglallen/API-project#readme"
 }
