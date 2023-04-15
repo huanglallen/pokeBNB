@@ -8,7 +8,9 @@ const cookieParser = require('cookie-parser');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
+
 const app = express();
+
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
