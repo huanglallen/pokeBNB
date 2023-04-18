@@ -2,18 +2,15 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-   await queryInterface.bulkInsert('Spots', [
+  up: async(queryInterface, Sequelize) => {
+    options.tableName = "Spots";
+    return queryInterface.bulkInsert(options, [
     {
       ownerId: 1,
       address: "123 Disney Lane",
@@ -62,16 +59,14 @@ module.exports = {
       description: "Place where music happens",
       price: 1000
     }
-   ])
+   ], {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-    await queryInterface.bulkDelete('Spots', {ownerId: [1, 2]})
+    options.tableName = "Spots";
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(options, {
+      ownerId: { [Op.in]: [1, 2] }
+    }, {});
   }
 };
