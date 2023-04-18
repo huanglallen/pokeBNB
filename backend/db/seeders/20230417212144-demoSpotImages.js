@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  up: async(queryInterface, Sequelize) => {
     options.tableName = 'SpotImages';
     return queryInterface.bulkInsert(options, [
     {
