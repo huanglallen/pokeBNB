@@ -19,25 +19,20 @@ module.exports = {
       preview: true
     },
     {
-      spotId: 1,
+      spotId: 2,
       url: 'fakeurl.again',
       preview: true
     },
     {
-      spotId: 2,
+      spotId: 3,
       url: 'another.fake',
       preview: false
     },
-    {
-      spotId: 2,
-      url: 'yup.again',
-      preview: true
-    },
-    {
-      spotId: 2,
-      url: 'youknowthe.deal',
-      preview: true
-    }
+    // {
+    //   spotId: 4,
+    //   url: 'yup.again',
+    //   preview: true
+    // }
    ])
   },
 
