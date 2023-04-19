@@ -1,10 +1,56 @@
 const express = require('express');
 const router = express.Router();
 
-const { Spot, SpotImage, Review } = require('../../db/models');
+const { User, Spot, SpotImage, Review } = require('../../db/models');
+
+router.get('/:spotId', async (req, res) => {
+    const { spotId } = req.params;
+    const item = await Spot.findOne({
+        where: { id: spotId },
+        include: [
+            { model: Review },
+            {
+                model: SpotImage,
+                attributes: {
+                    exclude: ['spotId', 'createdAt', 'updatedAt']
+                }
+            }
+        ]
+    });
+
+    //error response
+    if(!item) return res.status(404).json({
+        message: "Spot couldn't be found"
+    })
+
+    //get spot in js format
+    let spot = item.toJSON();
+
+    //create numReviews
+    spot.numReviews = spot.Reviews.length;
+
+    //create avgStarRating
+    let sum = 0;
+    for(let i = 0; i < spot.Reviews.length; i++) {
+        sum += spot.Reviews[i].stars
+    }
+    spot.avgStarRating = sum / spot.Reviews.length;
+    delete spot.Reviews;
+
+    //rearrange SpotImage
+    const imgHolder = spot.SpotImages;
+    delete spot.SpotImages;
+    spot.SpotImages = imgHolder;
+
+    //create owner
+    spot.Owner = await User.findByPk(spot.ownerId, {
+        attributes: ['id', 'firstName', 'lastName']
+    })
+
+    return res.json(spot);
+})
 
 router.get('/', async (req, res) => {
-    console.log('route hit')
     const spots = await Spot.findAll({
         include: [
             { model: Review },
@@ -23,7 +69,7 @@ router.get('/', async (req, res) => {
         for(let i = 0; i < spot.Reviews.length; i++) {
             sum += spot.Reviews[i].stars
         }
-        spot.avgRating = sum / spot.Reviews.length;;
+        spot.avgRating = sum / spot.Reviews.length;
         delete spot.Reviews;
     })
 
@@ -40,7 +86,9 @@ router.get('/', async (req, res) => {
         delete spot.SpotImages;
     });
 
-    return res.json(spotsList);
+    const result = {Spots: spotsList};
+
+    return res.json(result);
 })
 
 module.exports = router;
