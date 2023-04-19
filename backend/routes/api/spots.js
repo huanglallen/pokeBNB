@@ -156,7 +156,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(404).json({message: "Only the owner can add images to this spot"})
+        return res.status(404).json({message: "Only the owner can add images to this spot"});
     };
 
     //create the image
@@ -219,7 +219,7 @@ router.put('/:spotId', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { spotId } = req.params;
 
-    const exists = await Spot.findByPk(spotId)
+    const exists = await Spot.findByPk(spotId);
     const spot = await Spot.findOne({
         where: { id: spotId, ownerId: req.user.id }
     });
@@ -229,7 +229,7 @@ router.put('/:spotId', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(404).json({message: "Only the owner can add images to this spot"})
+        return res.status(404).json({message: "Only the owner can update this spot"})
     };
 
     //if missing info
@@ -266,7 +266,26 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 
     await spot.update(updatedSpot);
 
-    return res.json(spot)
+    return res.json(spot);
+});
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findOne({
+        where: { id: spotId, ownerId: req.user.id }
+    });
+
+    //error handlers
+    const exists = await Spot.findByPk(spotId);
+    if(!exists) {
+        return res.status(404).json({message: "Spot couldn't be found"});
+    };
+    if(!spot) {
+        return res.status(404).json({message: "Only the owner can delete this spot"});
+    };
+
+    await spot.destroy();
+    return res.json({message: "Successfully deleted"});
 });
 
 module.exports = router;
