@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 
 const { User, Spot, SpotImage, Review } = require('../../db/models');
 
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', await requireAuth, async (req, res) => {
     const id = req.user.id;
     const spots = await Spot.findAll({
         where: { ownerId: id },
@@ -14,6 +14,13 @@ router.get('/current', requireAuth, async (req, res) => {
             { model: SpotImage }
         ]
     });
+
+    //if no spots exist
+    if (spots.length === 0) {
+        return res.status(404).json({
+            message: 'You have no spots'
+        });
+    }
 
     //get all spots in js format
     let spotsList = [];
