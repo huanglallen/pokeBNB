@@ -153,10 +153,10 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
     //error response
     if(!spotId) {
-        return res.json({message: "Spot couldn't be found"});
+        return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.json({message: "Only the owner can add images to this spot"})
+        return res.status(404).json({message: "Only the owner can add images to this spot"})
     };
 
     //create the image
@@ -213,6 +213,60 @@ router.post('/', requireAuth, async (req, res) => {
     })
 
     return res.status(201).json(newSpot);
+});
+
+router.put('/:spotId', requireAuth, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { spotId } = req.params;
+
+    const exists = await Spot.findByPk(spotId)
+    const spot = await Spot.findOne({
+        where: { id: spotId, ownerId: req.user.id }
+    });
+
+    //error handlers
+    if(!exists) {
+        return res.status(404).json({message: "Spot couldn't be found"});
+    };
+    if(!spot) {
+        return res.status(404).json({message: "Only the owner can add images to this spot"})
+    };
+
+    //if missing info
+    const errors = {};
+    if (!address) errors.address = "Street address is required";
+    if (!city) errors.city = "City is required";
+    if (!state) errors.state = "State is required";
+    if (!country) errors.country = "Country is required";
+    if (!lat) errors.lat = "Latitude is not valid";
+    if (!lng) errors.lng = "Longitude is not valid";
+    if (!name || name.length > 50) errors.name = "Name must be less than 50 characters";
+    if (!description) errors.description = "Description is required";
+    if (!price) errors.price = "Price per day is required";
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors
+        });
+    }
+
+    //update
+    const updatedSpot = {
+        address,
+        city,
+        state,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+        updatedAt: new Date()
+    };
+
+    await spot.update(updatedSpot);
+
+    return res.json(spot)
 });
 
 module.exports = router;
