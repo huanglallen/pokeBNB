@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 
 const { User, Spot, SpotImage, Review } = require('../../db/models');
 
-router.get('/current',/*, requireAuth,*/ async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
     const id = req.user.id;
     const spots = await Spot.findAll({
         where: { ownerId: id },
