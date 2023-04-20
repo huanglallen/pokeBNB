@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { requireAuth } = require('../../utils/auth');
 
-const { User, Spot, SpotImage, Review } = require('../../db/models');
+const { User, Spot, SpotImage, Review, ReviewImage } = require('../../db/models');
 
 router.get('/current', requireAuth, async (req, res) => {
     const id = req.user.id;
@@ -50,6 +50,24 @@ router.get('/current', requireAuth, async (req, res) => {
 
     const result = {Spots: spotsList};
     return res.json(result);
+});
+
+router.get('/:spotId/reviews', async (req, res) => {
+    const { spotId } = req.params;
+    const reviews = await Review.findByPk(spotId, {
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    });
+
+    return res.json({Reviews: reviews});
 });
 
 router.get('/:spotId', async (req, res) => {
