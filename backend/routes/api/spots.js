@@ -191,6 +191,21 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     return res.json(resData);
 });
 
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const { review, stars } = req.body;
+    const spotId = parseInt(req.params.spotId);
+    const userId = req.user.id;
+
+    //create review
+    const newReview = await Review.create({
+        userId,
+        spotId,
+        review,
+        stars
+    });
+    return res.status(201).json(newReview);
+})
+
 router.post('/', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
