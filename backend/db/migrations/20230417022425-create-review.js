@@ -15,11 +15,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      spotId: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      userId: {
+      spotId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

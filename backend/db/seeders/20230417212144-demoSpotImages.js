@@ -26,11 +26,11 @@ module.exports = {
       url: 'another.fake',
       preview: false
     },
-    // {
-    //   spotId: 4,
-    //   url: 'yup.again',
-    //   preview: true
-    // }
+    {
+      spotId: 1,
+      url: 'yup.again',
+      preview: true
+    }
    ], {});
   },
 
