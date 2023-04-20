@@ -40,14 +40,11 @@ router.get('/current', requireAuth, async (req, res) => {
 
     //create previewImage
     spotsList.forEach(spot => {
-            spot.SpotImages.forEach(image => {
-                if(image.url) {
-                    spot.previewImage = image.url;
-                }
-            })
-        if(!spot.previewImage) {
-            spot.previewImage = 'no image found';
-        };
+        spot.previewImage = 'none';
+        const prevImg = spot.SpotImages.find((el) => el.preview === true);
+        if(prevImg) {
+            spot.previewImage = prevImg.url;
+        }
         delete spot.SpotImages;
     });
 
@@ -156,7 +153,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(404).json({message: "Only the owner can add images to this spot"});
+        return res.status(403).json({message: "Only the owner can add images to this spot"});
     };
 
     //create the image
@@ -174,7 +171,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     };
 
     return res.json(resData);
-})
+});
 
 router.post('/', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -229,7 +226,7 @@ router.put('/:spotId', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(404).json({message: "Only the owner can update this spot"})
+        return res.status(403).json({message: "Only the owner can update this spot"})
     };
 
     //if missing info
@@ -281,7 +278,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(404).json({message: "Only the owner can delete this spot"});
+        return res.status(403).json({message: "Only the owner can delete this spot"});
     };
 
     await spot.destroy();
