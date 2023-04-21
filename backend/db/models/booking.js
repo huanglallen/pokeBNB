@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE,
     createdAt: DataTypes.DATE,
-    updateAt: DataTypes.DATE
+    updatedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Booking',

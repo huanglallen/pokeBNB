@@ -28,6 +28,12 @@ module.exports = {
         userId: 2,
         startDate: new Date('2000-02-15'),
         endDate: new Date('2000-02-20')
+      },
+      {
+        spotId: 1,
+        userId: 4,
+        startDate: new Date('2001-01-15'),
+        endDate: new Date('2001-01-20')
       }
     ], {});
   },
