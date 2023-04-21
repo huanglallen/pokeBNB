@@ -61,17 +61,12 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     };
 
     //review must be current user
-    const isOwner = await Review.findOne({
-        where: {
-            userId: user
-        }
-    });
     if(user !== review.userId) {
         return res.status(403).json({ message: "Only the owner can add images to this review" });
     };
 
     //if 10 images already exists
-    if(revImgs.length > 10) {
+    if(revImgs.length >= 10) {
         return res.status(403).json({ "message": "Maximum number of images for this resource was reached" });
     }
 
@@ -89,5 +84,42 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
     return res.json(newImg)
 });
+
+router.put('/:reviewId', requireAuth, async (req, res) => {
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
+    const user = req.user.id;
+    const rev = await Review.findByPk(reviewId);
+
+    //if no review found
+    if(!rev) res.status(404).json({
+        "message": "Review couldn't be found"
+    });
+
+    //must be current user
+    if(user !== rev.userId) {
+        return res.status(403).json({ message: "Only the owner can add images to this review" });
+    };
+    //if missing body validations
+    const errors = {};
+    if(!review) errors.review = "Review text is required";
+    if(!stars || stars < 1 || stars > 5) errors.stars = "Stars must be an integer from 1 to 5";
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors
+        });
+    };
+
+
+    const updatedRev = {
+        review,
+        stars,
+        updatedAt: new Date()
+    };
+    await rev.update(updatedRev);
+
+    return res.json(rev);
+})
 
 module.exports = router;
