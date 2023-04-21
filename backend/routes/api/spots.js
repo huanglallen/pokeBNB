@@ -178,7 +178,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {
-        return res.status(403).json({message: "Only the owner can add images to this spot"});
+        return res.status(403).json({ message: "Only the owner can add images to this spot" });
     };
 
     //create the image
@@ -231,7 +231,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
         }
     });
     if (exists) {
-        return res.status(500).json({
+        return res.status(403).json({
             message: "User already has a review for this spot"
         });
     }
