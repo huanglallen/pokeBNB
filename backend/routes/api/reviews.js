@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { requireAuth } = require('../../utils/auth');
 
-const { User, Spot, SpotImage, Review, ReviewImage } = require('../../db/models');
+const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 
 router.get('/current', requireAuth, async (req, res) => {
     const id = req.user.id;
