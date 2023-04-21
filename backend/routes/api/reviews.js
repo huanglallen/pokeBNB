@@ -66,7 +66,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
             userId: user
         }
     });
-    if(isOwner !== review) {
+    if(user !== review.userId) {
         return res.status(403).json({ message: "Only the owner can add images to this review" });
     };
 
