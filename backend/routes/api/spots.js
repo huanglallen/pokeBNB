@@ -77,7 +77,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     return res.json({Reviews: reviews});
 });
 
-router.get('/:spotId/bookings', async (req, res) => {
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
     const bookings = await Booking.findAll({
