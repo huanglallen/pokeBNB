@@ -77,6 +77,33 @@ router.get('/:spotId/reviews', async (req, res) => {
     return res.json({Reviews: reviews});
 });
 
+router.get('/:spotId/bookings', async (req, res) => {
+    const { spotId } = req.params;
+    const user = req.user.id;
+    const bookings = await Booking.findAll({
+        where: { spotId: spotId},
+        attributes: ['spotId', 'startDate', 'endDate']
+    });
+    const spotsOwner = await User.findByPk(user, {
+        attributes: ['id', 'firstName', 'lastName'],
+        include: {
+            model: Booking,
+            where: { spotId: spotId }
+        }
+    });
+
+    //if no spotId found
+    if(!bookings.length) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    if(user === spotsOwner.id) {
+        return res.json({ Bookings: spotsOwner })
+    }
+
+    return res.json({ Bookings: bookings })
+})
+
 router.get('/:spotId', async (req, res) => {
     const { spotId } = req.params;
     const item = await Spot.findOne({
