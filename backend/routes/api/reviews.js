@@ -98,7 +98,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
     //must be current user
     if(user !== rev.userId) {
-        return res.status(403).json({ message: "Only the owner can add images to this review" });
+        return res.status(403).json({ message: "Only the owner can update this review" });
     };
     //if missing body validations
     const errors = {};
@@ -120,6 +120,26 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     await rev.update(updatedRev);
 
     return res.json(rev);
-})
+});
+
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    const { reviewId } = req.params;
+    const user = req.user.id;
+    const rev = await Review.findByPk(reviewId);
+
+    //if review does not exist
+    if(!rev) {
+        return res.status(404).json({ message: "Review couldn't be found" });
+    }
+
+    //must be current user
+    if(user !== rev.userId) {
+        return res.status(403).json({ message: "Only the owner can delete this review" });
+    };
+
+    await rev.destroy();
+
+    return res.json({ message: "Successfully deleted" });
+});
 
 module.exports = router;
