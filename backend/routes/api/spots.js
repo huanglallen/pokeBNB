@@ -273,6 +273,78 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     return res.status(201).json(newReview);
 })
 
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const { startDate, endDate } = req.body;
+    const user = req.user.id;
+    const spot = await Spot.findByPk(spotId);
+
+    const bookings = await Booking.findAll({
+        where: { spotId: spotId }
+    });
+
+    //cannot find spot
+    if(!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" })
+    };
+
+    //Spot must NOT belong to current user
+    if(spot.ownerId === user) {
+        return res.status(403).json({ message: "Owner cannot book their own spot" })
+    };
+
+    //body validation error
+    if(!endDate || new Date(endDate) <= new Date(startDate)) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: {
+              "endDate": "endDate cannot be on or before startDate"
+            }
+          });
+    };
+
+    // Check for existing bookings with conflicting dates
+const currBookings = await Booking.findAll({
+    where: {
+      spotId: spotId
+    }
+  });
+
+  const sdTime = new Date(startDate).getTime();
+  const edTime = new Date(endDate).getTime();
+
+  for (let booking of currBookings) {
+    const err = {};
+    const bookingS = new Date(booking.startDate).getTime();
+    const bookingE = new Date(booking.endDate).getTime();
+
+
+    if (bookingS <= sdTime && bookingE >= sdTime) {
+        err.startDate = "Start date conflicts with an existing booking";
+    };
+    if (bookingS <= edTime && bookingE >= edTime) {
+        err.endDate = "End date conflicts with an existing booking";
+    };
+
+    if(Object.keys(err).length > 0) {
+        return res.status(403).json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            errors: err
+            });
+        }
+    }
+
+    //create booking
+    const newBooking = await Booking.create({
+        spotId: parseInt(spotId),
+        userId: user,
+        startDate,
+        endDate
+    });
+
+    return res.json(newBooking);
+});
+
 router.post('/', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 

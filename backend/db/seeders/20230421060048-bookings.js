@@ -14,8 +14,8 @@ module.exports = {
       {
         spotId: 4,
         userId: 1,
-        startDate: new Date('2000-01-15'),
-        endDate: new Date('2000-01-20')
+        startDate: new Date(2000, 0, 1),
+        endDate: new Date(2000, 0, 10)
       },
       {
         spotId: 1,
@@ -34,6 +34,12 @@ module.exports = {
         userId: 4,
         startDate: new Date('2001-01-15'),
         endDate: new Date('2001-01-20')
+      },
+      {
+        spotId: 5,
+        userId: 1,
+        startDate: new Date('3000-01-15'),
+        endDate: new Date('3000-01-20')
       }
     ], {});
   },
