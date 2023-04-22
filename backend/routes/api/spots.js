@@ -303,34 +303,34 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
           });
     };
 
-    // Check for existing bookings with conflicting dates
-const currBookings = await Booking.findAll({
-    where: {
-      spotId: spotId
-    }
-  });
+    //check for booking conflicts
+    const currBookings = await Booking.findAll({
+        where: {
+        spotId: spotId
+        }
+    });
 
-  const sdTime = new Date(startDate).getTime();
-  const edTime = new Date(endDate).getTime();
+    const sdTime = new Date(startDate).getTime();
+    const edTime = new Date(endDate).getTime();
 
-  for (let booking of currBookings) {
-    const err = {};
-    const bookingS = new Date(booking.startDate).getTime();
-    const bookingE = new Date(booking.endDate).getTime();
+    for(let booking of currBookings) {
+        const err = {};
+        const bookingS = new Date(booking.startDate).getTime();
+        const bookingE = new Date(booking.endDate).getTime();
 
 
-    if (bookingS <= sdTime && bookingE >= sdTime) {
-        err.startDate = "Start date conflicts with an existing booking";
-    };
-    if (bookingS <= edTime && bookingE >= edTime) {
+        if(bookingS <= sdTime && bookingE >= sdTime) {
+            err.startDate = "Start date conflicts with an existing booking";
+        };
+        if (bookingS <= edTime && bookingE >= edTime) {
         err.endDate = "End date conflicts with an existing booking";
-    };
+        };
 
-    if(Object.keys(err).length > 0) {
-        return res.status(403).json({
-            message: "Sorry, this spot is already booked for the specified dates",
-            errors: err
-            });
+        if(Object.keys(err).length > 0) {
+            return res.status(403).json({
+                message: "Sorry, this spot is already booked for the specified dates",
+                errors: err
+                });
         }
     }
 
