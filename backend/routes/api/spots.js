@@ -152,12 +152,86 @@ router.get('/:spotId', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
+    const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    //validate query parameters
+    const errors = {};
+    if(page && (isNaN(page) || page < 1)) {
+        errors.page = "Page must be greater than or equal to 1";
+    };
+    if(size && (isNaN(size) || size < 1)) {
+        errors.size = "Size must be greater than or equal to 1";
+    };
+    if(minLat && isNaN(minLat)) {
+        errors.minLat = "Minimum latitude is invalid";
+    };
+    if(maxLat && isNaN(maxLat)) {
+        errors.maxLat = "Maximum latitude is invalid";
+    };
+    if(minLng && isNaN(minLng)) {
+        errors.minLng = "Minimum longitude is invalid";
+    };
+    if(maxLng && isNaN(maxLng)) {
+        errors.maxLng = "Maximum longitude is invalid";
+    };
+    if(minPrice && (isNaN(minPrice) || minPrice < 0)) {
+        errors.minPrice = "Minimum price must be a decimal greater than or equal to 0";
+    };
+    if(maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
+        errors.maxPrice = "Maximum price must be a decimal greater than or equal to 0";
+    };
+
+    if(Object.keys(errors).length) {
+        return res.status(400).json({
+            message: "Validation error",
+            errors
+        });
+    };
+
+    //search query
+    const query = {};
+    if(minLat && maxLat) {
+        query.lat = { [Op.between]: [minLat, maxLat] };
+    } else if(minLat) {
+        query.lat = { [Op.gte]: minLat };
+    } else if(maxLat) {
+        query.lat = { [Op.lte]: maxLat };
+    }
+    if(minLng && maxLng) {
+        query.lng = { [Op.between]: [minLng, maxLng] };
+    } else if(minLng) {
+        query.lng = { [Op.gte]: minLng };
+    } else if(maxLng) {
+        query.lng = { [Op.lte]: maxLng };
+    }
+    if(minPrice && maxPrice) {
+        query.price = { [Op.between]: [minPrice, maxPrice] };
+    } else if(minPrice) {
+        query.price = { [Op.gte]: minPrice };
+    } else if(maxPrice) {
+        query.price = { [Op.lte]: maxPrice };
+    }
+
+    //pagination
+    const pagination = {};
+
+    if(!page) page = 1;
+    if(!size) size = 20;
+
+    if(page <= 10 && size <= 20) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
     const spots = await Spot.findAll({
         include: [
             { model: Review },
             { model: SpotImage }
-        ]
+        ],
+        where: query,
+        ...pagination
     });
+    
     //get all spots in js format
     let spotsList = [];
     spots.forEach(spot => {
