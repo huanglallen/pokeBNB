@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { Op } = require('sequelize')
 const { requireAuth } = require('../../utils/auth');
 
 const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
@@ -14,13 +14,6 @@ router.get('/current', requireAuth, async (req, res) => {
             { model: SpotImage }
         ]
     });
-
-    //if no spots exist
-    if (spots.length === 0) {
-        return res.status(404).json({
-            message: 'You have no spots'
-        });
-    }
 
     //get all spots in js format
     let spotsList = [];
@@ -81,28 +74,43 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
     const bookings = await Booking.findAll({
-        where: { spotId: spotId},
-        attributes: ['spotId', 'startDate', 'endDate']
-    });
-    const spotsOwner = await User.findByPk(user, {
-        attributes: ['id', 'firstName', 'lastName'],
-        include: {
-            model: Booking,
-            where: { spotId: spotId }
-        }
-    });
+        where: { spotId: spotId },
+        attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
+        include: [
+          {
+            model: User,
+            as: 'User',
+            attributes: ['id', 'firstName', 'lastName']
+          }
+        ]
+      });
 
     //if no spotId found
     if(!bookings.length) {
         return res.status(404).json({message: "Spot couldn't be found"})
     };
 
-    if(user === spotsOwner.id) {
-        return res.json({ Bookings: spotsOwner })
-    }
+    const isOwner = await Spot.findAll({
+        where: { ownerId: user }
+    });
 
-    return res.json({ Bookings: bookings })
-})
+    //if not the owner
+    if(!isOwner) {
+        return res.json({ Bookings: bookings })
+    };
+
+    const bookingsList = bookings.map(booking => ({
+        User: booking.User,
+        id: booking.id,
+        spotId: booking.spotId,
+        userId: booking.userId,
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+        createdAt: booking.createdAt,
+        updatedAt: booking.updatedAt
+      }));
+    return res.json({ Bookings: bookingsList});
+});
 
 router.get('/:spotId', async (req, res) => {
     const { spotId } = req.params;
@@ -152,7 +160,7 @@ router.get('/:spotId', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     //validate query parameters
     const errors = {};
@@ -231,7 +239,7 @@ router.get('/', async (req, res) => {
         where: query,
         ...pagination
     });
-    
+
     //get all spots in js format
     let spotsList = [];
     spots.forEach(spot => {
@@ -273,9 +281,10 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spot = await Spot.findOne({
         where: { id: spotId, ownerId: userId }
     });
+    const findSpot = await Spot.findByPk(spotId);
 
     //error response
-    if(!spotId) {
+    if(!findSpot) {
         return res.status(404).json({message: "Spot couldn't be found"});
     };
     if(!spot) {

@@ -8,7 +8,7 @@ const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../d
 router.get('/current', requireAuth, async (req, res) => {
     const user = req.user.id;
     const bookings = await Booking.findAll({
-        where: { userid: user },
+        where: { userId: user },
         include: [
             {
                 model: Spot,
@@ -17,6 +17,7 @@ router.get('/current', requireAuth, async (req, res) => {
             },
         ],
     });
+    
     //get all bookings in js format
     let bookingsList = [];
     bookings.forEach(booking => {
