@@ -1,3 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-bottom: 5px black;
+    height: 70px;
+}
+
 .hidden {
     display: none;
+}
+
+nav {
+    display: flex;
+    /* width: 100%; */
+}
+
+ul {
+    display: flex;
+    width: 100%;
+    font-size: 18px;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+li {
+    list-style-type: none;
+}
+
+i {
+    size: 200px;
+}
+
+.profileButton {
+    size: 100px;
 }
