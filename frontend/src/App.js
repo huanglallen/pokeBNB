@@ -20,7 +20,7 @@ function App() {
       {isLoaded &&
         <Switch>
           <Route exact path='/' component={SpotIndex} />
-
+          {/* <Route exact path='/spots/spotId' component={} /> */}
         </Switch>
         }
     </>

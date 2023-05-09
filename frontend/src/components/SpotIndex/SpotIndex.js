@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSpots } from '../../store/spots';
+import SpotIndexItem from '../SpotIndexItem/SpotIndexItem';
 
 const SpotIndex = () => {
     const dispatch = useDispatch();
-    const spots = Object.values(
-        useSelector(state => state.spots ? state.spots : [])
-    );
+    const spotsObj = useSelector(state => state.spots.allSpots)
+    const spots = Object.values(spotsObj)
+    // console.log('spotsIndex', spots)
 
     useEffect(() => {
         dispatch(fetchSpots());
@@ -16,9 +17,9 @@ const SpotIndex = () => {
     return (
         <section>
             <ul>
-                {spots.map(spot => {
-                    <li spot={spot} key={spot.id}>{spot}</li>
-                })}
+                {spots.map(spot => (
+                    <SpotIndexItem spot={spot} key={spot.id} />
+                ))}
             </ul>
         </section>
     )

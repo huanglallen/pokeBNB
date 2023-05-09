@@ -14,20 +14,29 @@ export const receiveSpot = spot => ({
 })
 
 export const fetchSpots = () => async dispatch => {
-    const res = await csrfFetch('/api/spots');
-    if(res.ok) {
-        const spots = await res.json();
-        dispatch(loadSpots(spots));
+    const response = await csrfFetch('/api/spots');
+    if(response.ok) {
+        const data = await response.json();
+        console.log('dataThunk', data)
+        dispatch(loadSpots(data));
     };
 };
-
-const spotsReducer = (state = {}, action) => {
+const initialState = {
+    allSpots:{},
+     singleSpot: {}
+};
+const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_SPOTS:
-            const spotsState = {};
-            action.spots.forEach(spot => {
-                spotsState[spot.id] = spot;
+            const spotsState = {
+                allSpots:{},
+                singleSpot: {}
+            };
+            // console.log('actionState', action)
+            action.spots.Spots.forEach(spot => {
+                spotsState.allSpots[spot.id] = spot;
             });
+            // console.log('spotsStateNext', spotsState)
             return spotsState;
         case RECEIVE_SPOT:
             return { ...state, [action.spot.id]: action.spot };
