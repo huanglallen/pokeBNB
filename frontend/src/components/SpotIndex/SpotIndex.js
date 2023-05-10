@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSpots } from '../../store/spots';
 import SpotIndexItem from '../SpotIndexItem/SpotIndexItem';
+import './SpotIndex.css'
 
 const SpotIndex = () => {
     const dispatch = useDispatch();
     const spotsObj = useSelector(state => state.spots.allSpots)
     const spots = Object.values(spotsObj)
-    // console.log('spotsIndex', spots)
 
     useEffect(() => {
         dispatch(fetchSpots());

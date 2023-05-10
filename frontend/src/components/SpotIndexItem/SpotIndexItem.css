@@ -1,0 +1,27 @@
+/* Link {
+    display: grid;
+    grid-template-areas:
+    "img img"
+    "location rating"
+    "price price";
+}
+
+.img {
+    grid-area: img;
+}
+
+img:hover {
+
+}
+
+.spotLocation {
+    grid-area: location;
+}
+
+.spotRating {
+    grid-area: rating;
+}
+
+.spotPrice {
+    grid-area: price;
+} */

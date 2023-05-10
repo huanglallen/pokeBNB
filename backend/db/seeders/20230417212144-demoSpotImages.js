@@ -13,7 +13,7 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
     {
       spotId: 1,
-      url: 'fake.url',
+      url: 'https://i.imgur.com/fX5K11J_d.webp?maxwidth=520&shape=thumb&fidelity=high',
       preview: true
     },
     {
