@@ -441,6 +441,7 @@ router.post('/', requireAuth, async (req, res) => {
     if (!lng) errors.lng = "Longitude is not valid";
     if (!name || name.length > 50) errors.name = "Name must be less than 50 characters";
     if (!description) errors.description = "Description is required";
+    if(description.length < 30) errors.description = "Description needs a minimum of 30 characters"
     if (!price) errors.price = "Price per day is required";
 
     if (Object.keys(errors).length > 0) {

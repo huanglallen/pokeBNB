@@ -40,6 +40,9 @@ export const createSpot = (spot) => async dispatch => {
     if (response.ok) {
       const data = await response.json();
       dispatch(receiveSpot(data));
+    } else {
+        const errors = await response.json();
+        return errors;
     }
   };
 
@@ -61,7 +64,7 @@ const spotsReducer = (state = initialState, action) => {
             // console.log('spotsStateNext', spotsState)
             return spotsState;
         case RECEIVE_SPOT:
-            console.log('actiontest', action)
+            // console.log('actiontest', action)
             return { ...state, singleSpot: action.spot };
         default:
             return state;
