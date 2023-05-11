@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './SpotForm.css'
 import { createSpot } from "../../store/spots";
 
@@ -9,7 +9,7 @@ const SpotForm = ({ spot, formType}) => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const [country, setCountry] = useState(spot?.country);
-    const [street, setStreet] = useState(spot?.street);
+    const [address, setAddress] = useState(spot?.address);
     const [city, setCity] = useState(spot?.city);
     const [state, setState] = useState(spot?.state);
     const [description, setDescription] = useState(spot?.description);
@@ -20,12 +20,14 @@ const SpotForm = ({ spot, formType}) => {
     const [img2, setImg2] = useState(spot?.img2);
     const [img3, setImg3] = useState(spot?.img3);
     const [img4, setImg4] = useState(spot?.img4);
+    const ownerId = useSelector(state => state.session.user.id);
 
-    const onSubmit = async e => {
+    const onSubmit = async(e) => {
         e.preventDefault();
         setErrors({});
 
-        spot = { ...spot, country }
+        //fill according to backend post req
+        spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1}
 
         if(formType === "Create Spot") {
             const newSpot = await dispatch(createSpot(spot));
@@ -34,9 +36,9 @@ const SpotForm = ({ spot, formType}) => {
 
         if (spot.errors) {
             setErrors(spot.errors);
-          } else {
+        } else {
             history.push(`/spots/${spot.id}`);
-          }
+        }
     }
 
     return (
@@ -52,12 +54,12 @@ const SpotForm = ({ spot, formType}) => {
                 placeholder="Country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}/>
-            <div className="street">Street address {errors.address}</div>
+            <div className="address">Street address {errors.address}</div>
                 <input
                 type="text"
                 placeholder="Address"
-                value={street}
-                onChange={(e) => setStreet(e.target.value)}/>
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}/>
             <div className="cityState">
                 <div className="city">City {errors.city}</div>
                 <div className="state">State {errors.state}</div>

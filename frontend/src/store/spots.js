@@ -40,6 +40,7 @@ export const createSpot = (spot) => async dispatch => {
     if (response.ok) {
       const data = await response.json();
       dispatch(receiveSpot(data));
+      return data;
     } else {
         const errors = await response.json();
         return errors;
