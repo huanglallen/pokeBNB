@@ -7,6 +7,7 @@ import { Route } from "react-router-dom";
 
 import SpotIndex from "./components/SpotIndex/SpotIndex";
 import SpotShow from "./components/SpotShow/SpotShow";
+import CreateSpotForm from "./components/CreateSpotForm/CreateSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={SpotIndex} />
           <Route exact path='/spots/:spotId' component={SpotShow} />
+          <Route exact path='/spots/new' component={CreateSpotForm} />
         </Switch>
         }
     </>

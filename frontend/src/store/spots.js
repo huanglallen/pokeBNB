@@ -26,10 +26,22 @@ export const getSpot = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if(response.ok) {
         const data = await response.json();
-        console.log('data', data)
+        // console.log('data', data)
         dispatch(receiveSpot(data))
     }
 }
+
+export const createSpot = (spot) => async dispatch => {
+    const response = await csrfFetch('/api/spots', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spot),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(receiveSpot(data));
+    }
+  };
 
 const initialState = {
     allSpots:{},

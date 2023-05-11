@@ -21,6 +21,7 @@ const SpotShow = () => {
     }, [dispatch, spotId]);
 
     if(!spot) return;
+    if(!spot.SpotImages) return;
 
     return (
         <>
@@ -32,12 +33,12 @@ const SpotShow = () => {
             <div className="prevImg">
                 <img
                     className="spotImg"
-                    src={spot.SpotImages && spot.SpotImages[0].url}
+                    src={spot.SpotImages.slice(0, 1)}
                     alt=''
                 />
             </div>
             <div className="otherImgs">
-            {spot.SpotImages && spot.SpotImages.slice(1, 5).map(renderImage)}
+            {spot.SpotImages.slice(1, 5).map(renderImage)}
             </div>
         </div>
         <div className="info">
