@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import './SpotForm.css'
 import { createSpot } from "../../store/spots";
 
 const SpotForm = ({ spot, formType}) => {
@@ -12,10 +12,14 @@ const SpotForm = ({ spot, formType}) => {
     const [street, setStreet] = useState(spot?.street);
     const [city, setCity] = useState(spot?.city);
     const [state, setState] = useState(spot?.state);
-    const [description, setDescription] = useState(description?.state);
+    const [description, setDescription] = useState(spot?.description);
     const [name, setName] = useState(spot?.name);
     const [price, setPrice] = useState(spot?.price);
-    console.log(formType)
+    const [previewImg, setPreviewImg] = useState(spot?.previewImg);
+    const [img1, setImg1] = useState(spot?.img1);
+    const [img2, setImg2] = useState(spot?.img2);
+    const [img3, setImg3] = useState(spot?.img3);
+    const [img4, setImg4] = useState(spot?.img4);
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -43,35 +47,35 @@ const SpotForm = ({ spot, formType}) => {
                 Guests will only get your exact address once they booked a reservation
             </p>
             <div className="countryText">Country {errors.country}</div>
-            <input
-            type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}>Country</input>
+                <input
+                type="text"
+                placeholder="Country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}/>
             <div className="street">Street address {errors.address}</div>
-            <input
-            type="text"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}>Address</input>
+                <input
+                type="text"
+                placeholder="Address"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}/>
             <div className="cityState">
-                <div className="city">
-                    City {errors.city}
-                </div>
-                <div className="state">
-                    State {errors.state}
-                </div>
+                <div className="city">City {errors.city}</div>
+                <div className="state">State {errors.state}</div>
             </div>
             <div className="cityStateInputs">
                 <div className="cityInput">
                     <input
                     type="text"
+                    placeholder="City"
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}>City</input>
+                    onChange={(e) => setCity(e.target.value)}/>
                 </div>
                 <div className="stateInput">
                     <input
                     type="text"
+                    placeholder="STATE"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}>State</input>
+                    onChange={(e) => setState(e.target.value)}/>
                 </div>
             </div>
             <div className="description">
@@ -79,8 +83,9 @@ const SpotForm = ({ spot, formType}) => {
                 <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                 <input
                 type="text"
+                placeholder="Please write at least 30 characters"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}>Description</input>
+                onChange={(e) => setDescription(e.target.value)}/>
                 <div className="descriptionErr">{errors.description}</div>
             </div>
             <div className="name">
@@ -88,8 +93,9 @@ const SpotForm = ({ spot, formType}) => {
                 <p>Catch guests attention with a spot title that highlights what makes your place special</p>
                 <input
                 type="text"
+                placeholder="Name of your spot"
                 value={name}
-                onChange={(e) => setName(e.target.value)}>Name of your spot</input>
+                onChange={(e) => setName(e.target.value)}/>
                 <div className="nameErr">{errors.name}</div>
             </div>
             <div className="price">
@@ -98,15 +104,52 @@ const SpotForm = ({ spot, formType}) => {
                 <div className="priceInput">
                     $ <input
                     type="text"
+                    placeholder="Price per night (USD)"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)}>Price per night (USD)</input>
+                    onChange={(e) => setPrice(e.target.value)}/>
                     <div className="priceErr">{errors.price}</div>
                 </div>
             </div>
             <div className="image">
                 <h3>Liven up your spot with photos</h3>
                 <p>Submit a link to at least one photo to publish your spot.</p>
+
+                <input
+                type="text"
+                placeholder="Preview Image URL"
+                value={previewImg}
+                onChange={(e) => setPreviewImg(e.target.value)}/>
+                <div className="pImgErr"></div>
+
+                <input
+                type="text"
+                placeholder="Image URL"
+                value={img1}
+                onChange={(e) => setImg1(e.target.value)}/>
+                <div className="img1Err"></div>
+
+                <input
+                type="text"
+                placeholder="Image URL"
+                value={img2}
+                onChange={(e) => setImg2(e.target.value)}/>
+                <div className="img2Err"></div>
+
+                <input
+                type="text"
+                placeholder="Image URL"
+                value={img3}
+                onChange={(e) => setImg3(e.target.value)}/>
+                <div className="img3Err"></div>
+
+                <input
+                type="text"
+                placeholder="Image URL"
+                value={img4}
+                onChange={(e) => setImg4(e.target.value)}/>
+                <div className="img4Err"></div>
             </div>
+            <button className="submitButton" type="submit">{formType}</button>
         </form>
     )
 }

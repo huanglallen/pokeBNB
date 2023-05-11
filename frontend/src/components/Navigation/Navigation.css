@@ -1,8 +1,8 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    border-bottom: 5px black;
+    padding: 0 5px;
+    /* border-bottom: 5px black; */
     height: 70px;
 }
 
@@ -12,7 +12,8 @@
 
 nav {
     display: flex;
-    /* width: 100%; */
+    width: 100%;
+    border-bottom: 5px black;
 }
 
 ul {

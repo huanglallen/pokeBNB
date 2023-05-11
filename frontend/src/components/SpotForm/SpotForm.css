@@ -1,0 +1,46 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form > * {
+    justify-content: center;
+    width: 45%;
+    margin: 15px;
+}
+
+.countryText {
+    display: flex;
+}
+
+.cityState {
+    display: flex;
+}
+
+.cityStateInputs {
+    display: flex;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButton {
+    display: block;
+}
