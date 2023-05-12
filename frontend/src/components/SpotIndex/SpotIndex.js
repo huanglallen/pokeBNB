@@ -5,6 +5,7 @@ import { fetchSpots } from '../../store/spots';
 import SpotIndexItem from '../SpotIndexItem/SpotIndexItem';
 import './SpotIndex.css'
 
+//displays all spots into homepage
 const SpotIndex = () => {
     const dispatch = useDispatch();
     const spotsObj = useSelector(state => state.spots.allSpots)

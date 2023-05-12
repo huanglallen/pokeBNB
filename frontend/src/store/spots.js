@@ -29,6 +29,7 @@ export const fetchSpots = () => async dispatch => {
 };
 
 export const getSpot = (spotId) => async dispatch => {
+    console.log('getSpotTHUNK_spotId', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if(response.ok) {
         const data = await response.json();
@@ -53,7 +54,8 @@ export const createSpot = (spot) => async dispatch => {
 };
 
 export const editSpot = spot => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spot.Id}`, {
+    // console.log('editspotthunk', spot)
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot)

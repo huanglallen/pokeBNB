@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './SpotForm.css'
 import { createSpot, editSpot } from "../../store/spots";
 
+//form used by CreateSpot and UpdateSpot
 const SpotForm = ({ spot, formType}) => {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const SpotForm = ({ spot, formType}) => {
         if (spot.errors) {
             setErrors(spot.errors);
         } else {
+            console.log('historypush', spot)
             history.push(`/spots/${spot.id}`);
         }
     }
