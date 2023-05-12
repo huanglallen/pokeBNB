@@ -16,9 +16,10 @@ const CreateSpotForm = () => {
         img4: ''
     }
     return (
-        <>
+        <div className="createSpotForm">
+            <h2>Create a new Spot</h2>
             <SpotForm spot={spot} formType="Create Spot"/>
-        </>
+        </div>
     )
 }
 
