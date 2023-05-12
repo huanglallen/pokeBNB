@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 
-//looks at session.user spots from profileButton tab
+//looks at session.user's spots from profileButton tab
 const ManageSpots = () => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id);

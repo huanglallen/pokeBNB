@@ -6,7 +6,7 @@ import { getSpot } from "../../store/spots";
 const SpotShow = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    console.log('spotshow_spotId', spotId)
+    // console.log('spotshow_spotId', spotId)
     const spot = useSelector(state => state.spots.singleSpot);
     const renderImage = (image) => {
         return (

@@ -42,7 +42,7 @@ const SpotForm = ({ spot, formType}) => {
         if (spot.errors) {
             setErrors(spot.errors);
         } else {
-            console.log('historypush', spot)
+            // console.log('historypush', spot)
             history.push(`/spots/${spot.id}`);
         }
     }

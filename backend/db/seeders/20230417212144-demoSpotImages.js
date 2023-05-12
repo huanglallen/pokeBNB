@@ -18,12 +18,12 @@ module.exports = {
     },
     {
       spotId: 2,
-      url: 'fakeurl.again',
+      url: 'https://a0.muscache.com/im/pictures/miso/Hosting-31508919/original/f5cd57a3-b42d-4211-a73c-047c6cc2fc13.jpeg?im_w=720',
       preview: true
     },
     {
       spotId: 3,
-      url: 'another.fake',
+      url: 'https://a0.muscache.com/im/pictures/miso/Hosting-39974109/original/4bf3e6ff-555a-4553-973e-a371d4331e43.jpeg?im_w=720',
       preview: false
     },
     {
