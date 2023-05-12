@@ -24,7 +24,7 @@ const ManageSpots = () => {
                     <>
                     <SpotIndexItem spot={spot} key={spot.id} />
                     <div className="spotButtons">
-                        <button className="update">Update</button>
+                        <Link exact to={`/spots/${spot.id}/edit`} className="update">Update</Link>
                         <button className="delete">Delete</button>
                     </div>
                     </>

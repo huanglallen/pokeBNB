@@ -77,4 +77,3 @@ function ProfileButton({ user }) {
 }
 
 export default ProfileButton;
-{/* <i className="fa-solid fa-user"></i> */}

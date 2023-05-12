@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './SpotForm.css'
-import { createSpot } from "../../store/spots";
+import { createSpot, editSpot } from "../../store/spots";
 
 const SpotForm = ({ spot, formType}) => {
     const history = useHistory();
@@ -32,6 +32,10 @@ const SpotForm = ({ spot, formType}) => {
         if(formType === "Create Spot") {
             const newSpot = await dispatch(createSpot(spot));
             spot = newSpot;
+        }
+        if(formType === "Update Spot") {
+            const changeSpot = await dispatch(editSpot(spot));
+            spot = changeSpot;
         }
 
         if (spot.errors) {
