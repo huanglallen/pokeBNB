@@ -24,7 +24,12 @@ module.exports = {
     {
       spotId: 3,
       url: 'https://a0.muscache.com/im/pictures/miso/Hosting-39974109/original/4bf3e6ff-555a-4553-973e-a371d4331e43.jpeg?im_w=720',
-      preview: false
+      preview: true
+    },
+    {
+      spotId: 4,
+      url: 'https://a0.muscache.com/im/pictures/airflow/Hosting-1197834/original/2c2cf7d3-cfa7-46f6-b9d7-cfd88fef90eb.jpg?im_w=720',
+      preview: true
     },
     {
       spotId: 1,
