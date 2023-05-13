@@ -31,12 +31,8 @@ const SpotShow = () => {
             {spot.city}, {spot.state}, {spot.country}
         </h3>
         <div className="showImgs">
-            <div className="prevImg">
-                <img
-                    className="spotImg"
-                    src={spot.SpotImages.slice(0, 1)}
-                    alt=''
-                />
+        <div className="prevImg">
+                {spot.SpotImages.slice(0, 1).map(renderImage)}
             </div>
             <div className="otherImgs">
             {spot.SpotImages.slice(1, 5).map(renderImage)}

@@ -1,10 +1,18 @@
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch,  useSelector } from "react-redux";
+import { deleteSpot } from "../../store/spots";
 
 const SpotIndexItem = ({ spot }) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const rating = spot.avgRating;
     const spotImg = spot.previewImage;
+    const currentUser = useSelector(state => state.session.user);
+    // console.log('SpotIndex_currentUser', currentUser)
+    const handleDelete = e => {
+        e.preventDefault();
+        dispatch(deleteSpot(spot.id))
+    }
 
     if(!spotImg) return;
 
@@ -30,6 +38,12 @@ const SpotIndexItem = ({ spot }) => {
                             ${spot.price} night
                         </div>
                 </Link>
+                {currentUser && location.pathname === "/spots/current" &&currentUser.id === spot.ownerId && (
+                    <div className="spotButtons">
+                    <Link exact to={`/spots/${spot.id}/edit`} className="update">Update</Link>
+                    <button className="delete" onClick={handleDelete}>Delete</button>
+                </div>
+                )}
             </div>
         </li>
     )

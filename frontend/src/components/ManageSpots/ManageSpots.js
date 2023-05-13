@@ -24,10 +24,6 @@ const ManageSpots = () => {
                 {spots.map(spot => (
                     <>
                     <SpotIndexItem spot={spot} key={spot.id} />
-                    <div className="spotButtons">
-                        <Link exact to={`/spots/${spot.id}/edit`} className="update">Update</Link>
-                        <button className="delete">Delete</button>
-                    </div>
                     </>
                 ))}
             </ul>
