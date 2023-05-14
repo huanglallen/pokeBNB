@@ -19,7 +19,7 @@ const SpotForm = ({ spot, formType}) => {
     const [description, setDescription] = useState(spot?.description);
     const [name, setName] = useState(spot?.name);
     const [price, setPrice] = useState(spot?.price);
-    const [previewImg, setPreviewImg] = useState(spot?.previewImg);
+    const [previewImage, setPreviewImg] = useState(spot?.previewImage);
     const [img1, setImg1] = useState(spot?.img1);
     const [img2, setImg2] = useState(spot?.img2);
     const [img3, setImg3] = useState(spot?.img3);
@@ -36,7 +36,7 @@ const SpotForm = ({ spot, formType}) => {
             if (!description || description.length <= 30) formErrors.description = 'Description needs a minimum of 30 characters';
             if (!name) formErrors.name = 'Name is required';
             if (!price) formErrors.price = 'Price is required';
-            if (!previewImg) formErrors.previewImg = 'Preview image is required';
+            if (!previewImage) formErrors.previewImage = 'Preview image is required';
             if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img2 && !img2.endsWith('.jpg') && !img2.endsWith('.jpeg') && !img2.endsWith('.png')) formErrors.img2 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
@@ -45,7 +45,7 @@ const SpotForm = ({ spot, formType}) => {
             setErrors(formErrors);
         }
 
-    }, [country, address, city, state, description, name, price, previewImg, img1, img2, img3, img4, submitted]);
+    }, [country, address, city, state, description, name, price, previewImage, img1, img2, img3, img4, submitted]);
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -54,8 +54,16 @@ const SpotForm = ({ spot, formType}) => {
         //fill according to backend post req
         spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1}
 
+        const spotImages = [
+            previewImage,
+            img1,
+            img2,
+            img3,
+            img4
+        ]
+
         if(formType === "Create Spot") {
-            const newSpot = await dispatch(createSpot(spot));
+            const newSpot = await dispatch(createSpot(spot, spotImages));
             spot = newSpot;
         }
         if(formType === "Update Spot") {
@@ -149,9 +157,9 @@ const SpotForm = ({ spot, formType}) => {
                     <input
                     type="text"
                     placeholder="Preview Image URL"
-                    value={previewImg}
+                    value={previewImage}
                     onChange={(e) => setPreviewImg(e.target.value)}/>
-                    <div className="pImgErr">{errors.previewImg && <span className="error-message">{errors.previewImg}</span>}</div>
+                    <div className="pImgErr">{errors.previewImage && <span className="error-message">{errors.previewImage}</span>}</div>
 
                     <input
                     type="text"
