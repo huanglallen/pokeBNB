@@ -4,6 +4,8 @@ import { useState } from "react";
 import { deleteSpot } from "../../store/spots";
 import { Modal } from "../../context/Modal";
 import SpotDeleteModal from "../SpotDeleteModal";
+import "./SpotIndexItem.css";
+
 
 const SpotIndexItem = ({ spot }) => {
   const dispatch = useDispatch();

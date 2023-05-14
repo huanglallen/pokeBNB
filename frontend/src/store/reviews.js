@@ -19,22 +19,52 @@ export const removeReview = reviewId => ({
     reviewId
 });
 
+
+export const getReviews = spotId => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(loadReviews(data));
+        return data;
+    }
+}
+
 const initialState = {
     spot: {},
     user: {}
 };
 
 const reviewsReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case LOAD_REVIEWS:
-            const reviewsState = {
-                spot: {},
-                user: {}
-            };
-        default:
-            return state;
+    switch (action.type) {
+      case LOAD_REVIEWS:
+        const reviewState = {
+          spot: { ...state.spot },
+          user: { ...state.user },
+        };
+        action.reviews.Reviews.forEach((review) => {
+          reviewState.spot[review.id] = {
+            reviewData: review,
+            User: {
+              userData: review.User,
+            },
+            ReviewImages: review.ReviewImages,
+          };
+          reviewState.user[review.id] = {
+            reviewData: review,
+            User: {
+              userData: review.User,
+            },
+            Spot: {
+              spotData: review.Spot,
+            },
+            ReviewImages: review.ReviewImages,
+          };
+        });
 
+        return reviewState;
+      default:
+        return state;
     }
-};
+  };
 
 export default reviewsReducer;
