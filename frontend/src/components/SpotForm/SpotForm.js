@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './SpotForm.css'
 import { createSpot, editSpot } from "../../store/spots";
@@ -7,8 +7,11 @@ import { createSpot, editSpot } from "../../store/spots";
 //form used by CreateSpot and UpdateSpot
 const SpotForm = ({ spot, formType}) => {
     const history = useHistory();
+    const location = useLocation();
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
+    const [submitted, setSubmitted] = useState(false);
+
     const [country, setCountry] = useState(spot?.country);
     const [address, setAddress] = useState(spot?.address);
     const [city, setCity] = useState(spot?.city);
@@ -23,27 +26,30 @@ const SpotForm = ({ spot, formType}) => {
     const [img4, setImg4] = useState(spot?.img4);
     const ownerId = useSelector(state => state.session.user.id);
 
+    const formErrors = {};
     useEffect(() => {
-        const formErrors = {};
-        if (!country) formErrors.country = 'Country is required';
-        if (!address) formErrors.address = 'Address is required';
-        if (!city) formErrors.city = 'City is required';
-        if (!state) formErrors.state = 'State is required';
-        if (!description || description.length < 30) formErrors.description = 'Description needs a minimum of 30 characters';
-        if (!name) formErrors.name = 'Name is required';
-        if (!price) formErrors.price = 'Price is required';
-        if (!previewImg) formErrors.previewImg = 'Preview image is required';
-        if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
-        if (img2 && !img2.endsWith('.jpg') && !img2.endsWith('.jpeg') && !img2.endsWith('.png')) formErrors.img2 = 'Image URL must end in .png, .jpg, or .jpeg';
-        if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
-        if (img4 && !img4.endsWith('.jpg') && !img4.endsWith('.jpeg') && !img4.endsWith('.png')) formErrors.img4 = 'Image URL must end in .png, .jpg, or .jpeg';
+        if(submitted) {
+            if (!country) formErrors.country = 'Country is required';
+            if (!address) formErrors.address = 'Address is required';
+            if (!city) formErrors.city = 'City is required';
+            if (!state) formErrors.state = 'State is required';
+            if (!description || description.length <= 30) formErrors.description = 'Description needs a minimum of 30 characters';
+            if (!name) formErrors.name = 'Name is required';
+            if (!price) formErrors.price = 'Price is required';
+            if (!previewImg) formErrors.previewImg = 'Preview image is required';
+            if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
+            if (img2 && !img2.endsWith('.jpg') && !img2.endsWith('.jpeg') && !img2.endsWith('.png')) formErrors.img2 = 'Image URL must end in .png, .jpg, or .jpeg';
+            if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
+            if (img4 && !img4.endsWith('.jpg') && !img4.endsWith('.jpeg') && !img4.endsWith('.png')) formErrors.img4 = 'Image URL must end in .png, .jpg, or .jpeg';
 
-        setErrors(formErrors);
-        console.log("formERRORS", errors)
-    }, [country, address, city, state, description, name, price, previewImg, img1, img2, img3, img4]);
+            setErrors(formErrors);
+        }
+
+    }, [country, address, city, state, description, name, price, previewImg, img1, img2, img3, img4, submitted]);
 
     const onSubmit = async(e) => {
         e.preventDefault();
+        setSubmitted(true);
 
         //fill according to backend post req
         spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1}
@@ -111,7 +117,7 @@ const SpotForm = ({ spot, formType}) => {
                 placeholder="Please write at least 30 characters"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}/>
-                <div className="descriptionErr">{errors.description && <span className="error-message">errors.description</span>}</div>
+                <div className="descriptionErr">{errors.description && <span className="error-message">{errors.description}</span>}</div>
             </div>
             <div className="name">
                 <h3>Create a title for your spot</h3>
@@ -135,45 +141,47 @@ const SpotForm = ({ spot, formType}) => {
                     <div className="priceErr">{errors.price && <span className="error-message">{errors.price}</span>}</div>
                 </div>
             </div>
-            <div className="image">
-                <h3>Liven up your spot with photos</h3>
-                <p>Submit a link to at least one photo to publish your spot.</p>
+            {location.pathname === "/spots/new" && (
+                <div className="image">
+                    <h3>Liven up your spot with photos</h3>
+                    <p>Submit a link to at least one photo to publish your spot.</p>
 
-                <input
-                type="text"
-                placeholder="Preview Image URL"
-                value={previewImg}
-                onChange={(e) => setPreviewImg(e.target.value)}/>
-                <div className="pImgErr">{errors.previewImg && <span className="error-message">{errors.previewImg}</span>}</div>
+                    <input
+                    type="text"
+                    placeholder="Preview Image URL"
+                    value={previewImg}
+                    onChange={(e) => setPreviewImg(e.target.value)}/>
+                    <div className="pImgErr">{errors.previewImg && <span className="error-message">{errors.previewImg}</span>}</div>
 
-                <input
-                type="text"
-                placeholder="Image URL"
-                value={img1}
-                onChange={(e) => setImg1(e.target.value)}/>
-                <div className="img1Err">{errors.img1 && <span className="error-message">{errors.img1}</span>}</div>
+                    <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={img1}
+                    onChange={(e) => setImg1(e.target.value)}/>
+                    <div className="img1Err">{errors.img1 && <span className="error-message">{errors.img1}</span>}</div>
 
-                <input
-                type="text"
-                placeholder="Image URL"
-                value={img2}
-                onChange={(e) => setImg2(e.target.value)}/>
-                <div className="img2Err">{errors.img2 && <span className="error-message">{errors.img2}</span>}</div>
+                    <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={img2}
+                    onChange={(e) => setImg2(e.target.value)}/>
+                    <div className="img2Err">{errors.img2 && <span className="error-message">{errors.img2}</span>}</div>
 
-                <input
-                type="text"
-                placeholder="Image URL"
-                value={img3}
-                onChange={(e) => setImg3(e.target.value)}/>
-                <div className="img3Err">{errors.img3 && <span className="error-message">{errors.img3}</span>}</div>
+                    <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={img3}
+                    onChange={(e) => setImg3(e.target.value)}/>
+                    <div className="img3Err">{errors.img3 && <span className="error-message">{errors.img3}</span>}</div>
 
-                <input
-                type="text"
-                placeholder="Image URL"
-                value={img4}
-                onChange={(e) => setImg4(e.target.value)}/>
-                <div className="img4Err">{errors.img4 && <span className="error-message">{errors.img4}</span>}</div>
-            </div>
+                    <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={img4}
+                    onChange={(e) => setImg4(e.target.value)}/>
+                    <div className="img4Err">{errors.img4 && <span className="error-message">{errors.img4}</span>}</div>
+                </div>
+            )}
             <button className="submitButton" type="submit">{formType}</button>
         </form>
     )
