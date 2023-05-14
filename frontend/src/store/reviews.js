@@ -42,29 +42,28 @@ const reviewsReducer = (state = initialState, action) => {
           user: { ...state.user },
         };
         action.reviews.Reviews.forEach((review) => {
-          reviewState.spot[review.id] = {
-            reviewData: review,
-            User: {
-              userData: review.User,
-            },
-            ReviewImages: review.ReviewImages,
-          };
-          reviewState.user[review.id] = {
-            reviewData: review,
-            User: {
-              userData: review.User,
-            },
-            Spot: {
-              spotData: review.Spot,
-            },
-            ReviewImages: review.ReviewImages,
-          };
+            reviewState.spot[review.id] = {
+                reviewData: review,
+                User: {
+                userData: review.User,
+                },
+                ReviewImages: review.ReviewImages,
+            };
+            reviewState.user[review.id] = {
+                reviewData: review,
+                User: {
+                userData: review.User,
+                },
+                Spot: {
+                spotData: review.Spot,
+                },
+                ReviewImages: review.ReviewImages,
+            };
         });
-
         return reviewState;
       default:
         return state;
     }
-  };
+};
 
 export default reviewsReducer;
