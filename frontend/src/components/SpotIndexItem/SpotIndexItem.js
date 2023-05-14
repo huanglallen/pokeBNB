@@ -8,7 +8,7 @@ const SpotIndexItem = ({ spot }) => {
     const rating = spot.avgRating;
     const spotImg = spot.previewImage;
     const currentUser = useSelector(state => state.session.user);
-    console.log('SpotIndex_currentUser', currentUser)
+    // console.log('SpotIndex_currentUser', currentUser)
     const handleDelete = e => {
         e.preventDefault();
         dispatch(deleteSpot(spot.id))

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './SpotForm.css'
@@ -23,9 +23,27 @@ const SpotForm = ({ spot, formType}) => {
     const [img4, setImg4] = useState(spot?.img4);
     const ownerId = useSelector(state => state.session.user.id);
 
+    useEffect(() => {
+        const formErrors = {};
+        if (!country) formErrors.country = 'Country is required';
+        if (!address) formErrors.address = 'Address is required';
+        if (!city) formErrors.city = 'City is required';
+        if (!state) formErrors.state = 'State is required';
+        if (!description || description.length < 30) formErrors.description = 'Description needs a minimum of 30 characters';
+        if (!name) formErrors.name = 'Name is required';
+        if (!price) formErrors.price = 'Price is required';
+        if (!previewImg) formErrors.previewImg = 'Preview image is required';
+        if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
+        if (img2 && !img2.endsWith('.jpg') && !img2.endsWith('.jpeg') && !img2.endsWith('.png')) formErrors.img2 = 'Image URL must end in .png, .jpg, or .jpeg';
+        if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
+        if (img4 && !img4.endsWith('.jpg') && !img4.endsWith('.jpeg') && !img4.endsWith('.png')) formErrors.img4 = 'Image URL must end in .png, .jpg, or .jpeg';
+
+        setErrors(formErrors);
+        console.log("formERRORS", errors)
+    }, [country, address, city, state, description, name, price, previewImg, img1, img2, img3, img4]);
+
     const onSubmit = async(e) => {
         e.preventDefault();
-        setErrors({});
 
         //fill according to backend post req
         spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1}
@@ -39,10 +57,9 @@ const SpotForm = ({ spot, formType}) => {
             spot = changeSpot;
         }
 
-        if (spot.errors) {
+        if (Object.keys(errors).length > 0) {
             setErrors(spot.errors);
         } else {
-            // console.log('historypush', spot)
             history.push(`/spots/${spot.id}`);
         }
     }
@@ -53,21 +70,22 @@ const SpotForm = ({ spot, formType}) => {
             <p>
                 Guests will only get your exact address once they booked a reservation
             </p>
-            <div className="countryText">Country {errors.country}</div>
+            <div className="countryText">Country {errors.country && <span className="error-message">{errors.country}</span>}</div>
                 <input
                 type="text"
                 placeholder="Country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}/>
-            <div className="address">Street address {errors.address}</div>
+            <div className="address">Street address {errors.address && <span className="error-message">{errors.address}</span>}</div>
                 <input
                 type="text"
                 placeholder="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}/>
             <div className="cityState">
-                <div className="city">City {errors.city}</div>
-                <div className="state">State {errors.state}</div>
+                <div className="city">City {errors.city && <span className="error-message">{errors.city}</span>}</div>
+                <div className="state">State {errors.state && <span className="error-message">{errors.state}</span>}
+            </div>
             </div>
             <div className="cityStateInputs">
                 <div className="cityInput">
@@ -93,7 +111,7 @@ const SpotForm = ({ spot, formType}) => {
                 placeholder="Please write at least 30 characters"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}/>
-                <div className="descriptionErr">{errors.description}</div>
+                <div className="descriptionErr">{errors.description && <span className="error-message">errors.description</span>}</div>
             </div>
             <div className="name">
                 <h3>Create a title for your spot</h3>
@@ -103,7 +121,7 @@ const SpotForm = ({ spot, formType}) => {
                 placeholder="Name of your spot"
                 value={name}
                 onChange={(e) => setName(e.target.value)}/>
-                <div className="nameErr">{errors.name}</div>
+                {errors.name && <span className="nameErr error-message">{errors.name}</span>}
             </div>
             <div className="price">
                 <h3>Set a base price for your spot</h3>
@@ -114,7 +132,7 @@ const SpotForm = ({ spot, formType}) => {
                     placeholder="Price per night (USD)"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}/>
-                    <div className="priceErr">{errors.price}</div>
+                    <div className="priceErr">{errors.price && <span className="error-message">{errors.price}</span>}</div>
                 </div>
             </div>
             <div className="image">
@@ -126,35 +144,35 @@ const SpotForm = ({ spot, formType}) => {
                 placeholder="Preview Image URL"
                 value={previewImg}
                 onChange={(e) => setPreviewImg(e.target.value)}/>
-                <div className="pImgErr"></div>
+                <div className="pImgErr">{errors.previewImg && <span className="error-message">{errors.previewImg}</span>}</div>
 
                 <input
                 type="text"
                 placeholder="Image URL"
                 value={img1}
                 onChange={(e) => setImg1(e.target.value)}/>
-                <div className="img1Err"></div>
+                <div className="img1Err">{errors.img1 && <span className="error-message">{errors.img1}</span>}</div>
 
                 <input
                 type="text"
                 placeholder="Image URL"
                 value={img2}
                 onChange={(e) => setImg2(e.target.value)}/>
-                <div className="img2Err"></div>
+                <div className="img2Err">{errors.img2 && <span className="error-message">{errors.img2}</span>}</div>
 
                 <input
                 type="text"
                 placeholder="Image URL"
                 value={img3}
                 onChange={(e) => setImg3(e.target.value)}/>
-                <div className="img3Err"></div>
+                <div className="img3Err">{errors.img3 && <span className="error-message">{errors.img3}</span>}</div>
 
                 <input
                 type="text"
                 placeholder="Image URL"
                 value={img4}
                 onChange={(e) => setImg4(e.target.value)}/>
-                <div className="img4Err"></div>
+                <div className="img4Err">{errors.img4 && <span className="error-message">{errors.img4}</span>}</div>
             </div>
             <button className="submitButton" type="submit">{formType}</button>
         </form>
