@@ -96,7 +96,7 @@ export const deleteSpot = spotId => async dispatch => {
 
 const initialState = {
     allSpots:{},
-     singleSpot: {}
+    singleSpot: {}
 };
 const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -105,14 +105,11 @@ const spotsReducer = (state = initialState, action) => {
                 allSpots:{},
                 singleSpot: {}
             };
-            // console.log('actionState', action)
             action.spots.Spots.forEach(spot => {
                 spotsState.allSpots[spot.id] = spot;
             });
-            // console.log('spotsStateNext', spotsState)
             return spotsState;
         case RECEIVE_SPOT:
-            // console.log('actiontest', action)
             return { ...state, singleSpot: action.spot };
         case UPDATE_SPOT:
             return { ...state, [action.spot.id]: action.spot };
