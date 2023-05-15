@@ -38,7 +38,7 @@ const SpotShow = () => {
         //modal items
         const { setModalContent } = useModal();
         const openCreateReviewModal = () => {
-            setModalContent(<CreateReviewForm />);
+            setModalContent(<CreateReviewForm  spotId={spotId}/>);
         };
 
     if(!spot || !spotId || !spot.SpotImages) return null;
