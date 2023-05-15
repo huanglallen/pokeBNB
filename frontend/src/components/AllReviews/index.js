@@ -15,7 +15,9 @@ const AllReviews = ({ spotId }) => {
         const month = date.toLocaleString("default", { month: "short" });
         const year = date.getFullYear();
         return `${month} ${year}`;
-  };
+    };
+
+    // const filteredReviews = Object.values(reviews)
 
     return (
         <div className="allReviews">

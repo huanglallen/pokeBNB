@@ -27,6 +27,19 @@ export const getReviews = spotId => async dispatch => {
         dispatch(loadReviews(data));
         return data;
     }
+};
+
+export const MakeReview = (spotId, review) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    });
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(createReview(data));
+        return data;
+    }
 }
 
 const initialState = {
@@ -36,33 +49,41 @@ const initialState = {
 
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
-      case LOAD_REVIEWS:
-        const reviewState = {
-          spot: { ...state.spot },
-          user: { ...state.user },
-        };
-        action.reviews.Reviews.forEach((review) => {
-            reviewState.spot[review.id] = {
-                reviewData: review,
-                User: {
-                userData: review.User,
-                },
-                ReviewImages: review.ReviewImages,
+        case LOAD_REVIEWS:
+            const reviewState = {
+                spot: { ...state.spot },
+                user: { ...state.user },
             };
-            reviewState.user[review.id] = {
-                reviewData: review,
-                User: {
-                userData: review.User,
-                },
-                Spot: {
-                spotData: review.Spot,
-                },
-                ReviewImages: review.ReviewImages,
-            };
-        });
-        return reviewState;
-      default:
-        return state;
+            action.reviews.Reviews.forEach((review) => {
+                reviewState.spot[review.id] = {
+                    reviewData: review,
+                    User: {
+                    userData: review.User,
+                    },
+                    ReviewImages: review.ReviewImages,
+                };
+                reviewState.user[review.id] = {
+                    reviewData: review,
+                    User: {
+                        userData: review.User,
+                    },
+                    Spot: {
+                        spotData: review.Spot,
+                    },
+                    ReviewImages: review.ReviewImages,
+                };
+            });
+            return reviewState;
+        case CREATE_REVIEW:
+            const createReviewState = {
+                ...state,
+                spot: { ...state.spot },
+                user: { ...state.user }
+            }
+            createReviewState.user[action.review.id] = action.review;
+            return createReviewState;
+        default:
+            return state;
     }
 };
 

@@ -4,28 +4,44 @@ import { useParams } from "react-router-dom";
 import { getSpot } from "../../store/spots";
 import AllReviews from "../AllReviews";
 import { getReviews } from "../../store/reviews";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
+import CreateReviewForm from "../CreateReview";
 
 const SpotShow = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     // console.log('spotshow_spotId', spotId)
     const spot = useSelector(state => state.spots.singleSpot);
+    const user = useSelector(state => state.session.user);
+    const reviews = useSelector(state => state.reviews.user);
+    // const allReviewUsers = useSelector(state => state.reviews.user);
+    // const existingReview = Object.values(allReviewUsers).some(user => user.User.userData.id);
+    // console.log('SPOT_allReviews', allReviewUsers)
+    // console.log("SPOTCHECKER", existingReview)
+
+
     const renderImage = (image) => {
         return (
             <img
-                src={image.url}
-                alt=''
+            src={image.url}
+            alt=''
             />
-        );
-    };
+            );
+        };
 
-    useEffect(() => {
-        dispatch(getSpot(spotId));
-        dispatch(getReviews(spotId));
-    }, [dispatch, spotId]);
+        useEffect(() => {
+            dispatch(getSpot(spotId));
+            dispatch(getReviews(spotId));
+        }, [dispatch, spotId]);
 
-    if(!spot) return;
-    if(!spot.SpotImages) return;
+        //modal items
+        const { setModalContent } = useModal();
+        const openCreateReviewModal = () => {
+            setModalContent(<CreateReviewForm />);
+        };
+
+    if(!spot || !spotId || !spot.SpotImages) return null;
 
     return (
         <div className="spotShow">
@@ -61,9 +77,14 @@ const SpotShow = () => {
                     <i className="fa-solid fa-star"/>
                     {spot.avgStarRating} . {spot.numReviews} reviews
                 </h2>
+                {user && !(user.id === spot.ownerId) && (
+                    <div className="PostReviewModal">
+                        <button onClick={openCreateReviewModal}>Post Your Review</button>
+                    </div>
+                )}
             </div>
             <div className="reviews">
-                {spot && <AllReviews spotId={spotId} />}
+                <AllReviews spotId={spotId} />
             </div>
         </div>
     )
