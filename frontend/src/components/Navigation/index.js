@@ -8,16 +8,17 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink exact to="/">
-            <i className="fa-brands fa-airbnb">
-              pokebnb
-            </i></NavLink>
+    <nav id='navbar'>
+      <ul className='navitems'>
+        <li className='homeButton'>
+          <NavLink exact to="/" >
+            <i className="fa-brands fa-airbnb" id='abnbIcon'>
+            <div className='pokebnb'>pokebnb</div>
+          </i>
+          </NavLink>
         </li>
         {sessionUser && (
-          <li>
+          <li className="CreateSpotButton">
             <NavLink exact to='/spots/new'>
               Create a New Spot
             </NavLink>

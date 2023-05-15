@@ -1,9 +1,20 @@
 /* TODO Add site wide styles */
-
-#root {
-    width: 100%;
+:root {
+    --abnb: #FF5A5F
 }
 
-/* Header {
-    display: flex;
-} */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    color: inherit;
+}

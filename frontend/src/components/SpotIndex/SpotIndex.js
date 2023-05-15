@@ -16,7 +16,7 @@ const SpotIndex = () => {
     }, [dispatch]);
 
     return (
-        <section>
+        <section className='SpotIndexWrapper'>
             <ul>
                 {spots.map(spot => (
                     <SpotIndexItem spot={spot} key={spot.id} />

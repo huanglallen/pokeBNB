@@ -1,37 +1,45 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0 5px;
-    /* border-bottom: 5px black; */
-    height: 70px;
-}
-
 .hidden {
     display: none;
 }
 
-nav {
+#navbar {
     display: flex;
-    width: 100%;
-    border-bottom: 5px black;
+    justify-content: space-between;
+    /* width: 100%; */
+    height: 70px;
+    border-bottom: solid 2px lightgrey;
+    padding: 0 10px;
 }
 
-ul {
+.homeButton {
+    color: var(--abnb);
+}
+
+#abnbIcon {
     display: flex;
+    font-size: 50px;
+}
+
+.pokebnb {
+    font-weight: bold;
+    font-size: 27px;
+    padding-top: 8px;
+    padding-left: 5px;
+}
+
+.navitems {
+    display: flex;
+}
+
+.navitems {
     width: 100%;
     font-size: 18px;
     justify-content: space-between;
     margin: 15px;
 }
 
-li {
-    list-style-type: none;
-}
-
-i {
-    size: 200px;
-}
-
-.profileButton {
-    size: 100px;
+.CreateSpotButton {
+    margin-left: 620px;
+    margin-top: 10px;
+    color: teal;
 }

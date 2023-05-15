@@ -5,6 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from "react-router-dom";
+import './ProfileButton.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -42,19 +43,22 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fa-solid fa-bars"></i>
-        <i className="fa-solid fa-user"></i>
+      <button onClick={openMenu} className="profilebutton">
+        <div className="iconbars">
+          <i className="fa-solid fa-bars"></i>
+        </div>
+        <div className="iconuser">
+        <i className="fa-solid fa-circle-user"></i>
+        </div>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            <li>Hello, {user.username}</li>
             <li>{user.email}</li>
-            <NavLink exact to="/spots/current">Manage Spots</NavLink>
-            <li>
-              <button onClick={logout}>Log Out</button>
+            <NavLink exact to="/spots/current" className="managespot">Manage Spots</NavLink>
+            <li className="logoutWrapper">
+              <button className="logout" onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
