@@ -1,4 +1,142 @@
-.context {
+.spotShow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+}
+
+.spotname {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 25px 0;
+}
+
+.location {
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+
+.showImgs {
+    display: flex;
+}
+
+.prevImg > img {
+    height: 400px;
+    width: 550px;
+}
+
+.otherImgs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.otherImgs > img {
+    height: 200px;
+    width: 224px;
+    padding: 2px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+    border-bottom: 2px solid black;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.spotContext {
     display: flex;
     flex-direction: column;
 }
+
+.host {
+    font-size: 24px;
+    padding-bottom: 20px;
+}
+
+.spotdescription {
+    padding-bottom: 20px;
+}
+
+.reserveWrapper {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    width: 35%;
+}
+
+.reserve {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reserveInfo {
+    display: flex;
+}
+
+.resPrice {
+    font-size: 24px;
+    padding-right: 5px;
+}
+
+.resNight {
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.reviewInfo {
+    display: flex;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+.dot {
+    font-size: 3px;
+    padding: 0 10px;
+    padding-top: 9px;
+}
+
+.resButton {
+    background-color: var(--abnb);
+    color: white;
+    box-shadow: 3px 3px 1px black;
+    padding: 15px 60px;
+    margin: 10px 0;
+
+}
+
+.resButton:hover {
+    cursor: pointer;
+}
+
+.revHead {
+    display: flex;
+    padding: 20px 0;
+}
+
+.resIcon {
+    padding-right: 5px;
+}
+
+.resDot {
+    font-size: 5px;
+    padding: 0 15px;
+    padding-top: 10px;
+}
+
+.RevPostButton {
+    background-color: darkgrey;
+    box-shadow: 3px 3px 1px black;
+    color: white;
+    border: black 2px solid;
+    padding: 3px 5px;
+    font-size: 16px;
+}
+
+.RevPostButton:hover {
+    cursor: pointer;
+}
+
