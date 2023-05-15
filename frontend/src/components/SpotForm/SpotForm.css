@@ -167,3 +167,7 @@ input::placeholder {
     width: 25%;
     font-size: 18px;
 }
+
+.submitButton:hover {
+    cursor: pointer;
+}

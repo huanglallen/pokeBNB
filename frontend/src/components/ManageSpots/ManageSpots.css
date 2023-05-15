@@ -1,0 +1,32 @@
+.manageWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.manageHead {
+    margin: 20px 0;
+    margin-left: 60px;
+    font-size: 24px;
+}
+
+.createSbutton {
+    margin-left: 60px;
+    border: black 2px solid;
+    box-shadow: 3px 3px 1px black;
+    color: white;
+    background-color: darkgray;
+    padding: 2px 5px;
+    font-size: 18px;
+    width: 180px;
+}
+
+.createSbutton:hover {
+    cursor: pointer;
+}
+
+.manageSpotsWrapper {
+    padding: 30px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px;
+}

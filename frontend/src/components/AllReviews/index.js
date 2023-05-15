@@ -5,7 +5,11 @@ import './AllReviews.css';
 
 const AllReviews = ({ spotId }) => {
     const dispatch = useDispatch();
-    const reviews = useSelector(state => state.reviews.user);
+    const singleSpotId = useSelector(state => state.spots.singleSpot.id)
+    const reviews = useSelector(state => {
+        const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
+        return filteredReviews;
+      });
 
     useEffect(() => {
         dispatch(getReviews(spotId));
@@ -18,11 +22,12 @@ const AllReviews = ({ spotId }) => {
         return `${month} ${year}`;
     };
 
+    if(!reviews) return null;
     // const filteredReviews = Object.values(reviews)
 
     return (
         <div className="allReviews">
-        {Object.values(reviews).map((review) => (
+        {reviews.map((review) => (
             <div className="reviewWrapper" key={review.reviewData.id}>
                 <h3 className="reviewName">{review.User.userData.firstName}</h3>
                 <h4 className="date">{getDate(review.reviewData.updatedAt)}</h4>

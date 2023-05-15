@@ -57,6 +57,10 @@
     padding-bottom: 20px;
 }
 
+.hasReviews, .hasReviews2 {
+    display: flex;
+}
+
 .spotdescription {
     padding-bottom: 20px;
 }
@@ -141,4 +145,8 @@
 
 .RevPostButton:hover {
     cursor: pointer;
+}
+
+.beFirst {
+    padding-bottom: 200px;
 }

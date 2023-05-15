@@ -1,1 +1,49 @@
+#DeleteModalWrapper {
+    border: 5px black solid;
+    height: 320px;
+    width: 500px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
 
+.deleteModalHead {
+    display: flex;
+    justify-content: center;
+    font-weight: normal;
+    font-size: 36px;
+    padding: 15px 0;
+}
+
+.deleteModalText {
+    font-weight: normal;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+.deleteYes {
+    font-size: 18px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: var(--abnb);
+}
+
+.deleteNo {
+    font-size: 18px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: darkgray;
+}
+
+.deleteYes:hover, .deleteNo:hover {
+    cursor: pointer;
+}

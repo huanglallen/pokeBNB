@@ -15,14 +15,8 @@ const SpotShow = () => {
     // console.log('spotshow_spotId', spotId)
     const spot = useSelector(state => state.spots.singleSpot);
     const user = useSelector(state => state.session.user);
-    const reviews = useSelector(state => state.reviews.user);
     const rating = useSelector(state => state.spots.singleSpot.avgStarRating)
-    // const allReviewUsers = useSelector(state => state.reviews.user);
-    // const existingReview = Object.values(allReviewUsers).some(user => user.User.userData.id);
-    // console.log('SPOT_allReviews', allReviewUsers)
-    // console.log("SPOTCHECKER", existingReview)
-
-
+    // console.log("SPOTSHOW_REVIEWS", reviews)
     const renderImage = (image) => {
         return (
             <img
@@ -72,14 +66,20 @@ const SpotShow = () => {
                         </div>
                         <div className="reviewInfo">
                             <i className="fa-solid fa-star"/>
-                            {Math.round(rating * 10) / 10}
-                            <div className="dot">
-                                <i class="fa-solid fa-circle"></i>
-                            </div>
-                            {spot.numReviews} reviews
+                            {spot.numReviews && spot.numReviews > 0 ? (
+                                <div className="hasReviews">
+                                    {Math.round(rating * 10) / 10}
+                                    <div className="dot">
+                                        <i class="fa-solid fa-circle"></i>
+                                    </div>
+                                    {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"}
+                                </div>
+                            ) : <div className="noReview">New</div> }
                         </div>
                     </div>
-                    <button className="resButton">
+                    <button
+                    className="resButton"
+                    onClick={() => alert("Feature coming soon.")}>
                         Reserve
                     </button>
                 </div>
@@ -90,19 +90,28 @@ const SpotShow = () => {
                     <div className="resIcon">
                         <i className="fa-solid fa-star"/>
                     </div>
-                    {Math.round(rating * 10) / 10}
-                    <div className="resDot">
-                        <i class="fa-solid fa-circle"></i>
-                    </div>
-                    <li className="resNum">
-                        {spot.numReviews} reviews
-                    </li>
+                    {spot.numReviews && spot.numReviews > 0 ? (
+                        <div className="hasReviews2">
+                            {Math.round(rating * 10) / 10}
+                            <div className="resDot">
+                                <i class="fa-solid fa-circle"></i>
+                            </div>
+                            <li className="resNum">
+                                {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"}
+                            </li>
+                        </div>
+                    ) : <div className="noReviews2">New</div>}
                 </h2>
                 {user && !(user.id === spot.ownerId) && (
                     <div className="PostReviewModal">
                         <button className="RevPostButton" onClick={openCreateReviewModal}>Post Your Review</button>
                     </div>
                 )}
+                {spot.numReviews === 0 && (
+                    <div className="beFirst">
+                    Be the first to post a review!
+                    </div>
+                    )}
             </div>
             <div className="reviews">
                 <AllReviews spotId={spotId} />

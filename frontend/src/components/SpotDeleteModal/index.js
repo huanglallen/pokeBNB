@@ -18,10 +18,10 @@ const SpotDeleteModal = ({ spot, handleDeleteConfirmation }) => {
 
   return (
     <div id="DeleteModalWrapper">
-      <h2>Confirm Delete</h2>
-      <h3>Are you sure you want to remove this spot from the listings?</h3>
-      <button onClick={handleDelete}>Yes (Delete Spot)</button>
-      <button onClick={handleCancel}>No (Keep Spot)</button>
+      <h2 className='deleteModalHead'>Confirm Delete</h2>
+      <h3 className='deleteModalText'>Are you sure you want to remove this spot from the listings?</h3>
+      <button className='deleteYes' onClick={handleDelete}>Yes (Delete Spot)</button>
+      <button className='deleteNo' onClick={handleCancel}>No (Keep Spot)</button>
     </div>
   );
 };

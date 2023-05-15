@@ -66,20 +66,20 @@ const SpotIndexItem = ({ spot }) => {
             <div className="night">night</div>
           </div>
 
-
-        </Link>
         {currentUser &&
           location.pathname === "/spots/current" &&
           currentUser.id === spot.ownerId && (
             <div className="spotButtons">
-              <Link exact to={`/spots/${spot.id}/edit`} className="update">
+              <Link exact to={`/spots/${spot.id}/edit`} className="updateButton">
                 Update
               </Link>
-              <button className="delete" onClick={handleDelete}>
+              <button className="deleteButton" onClick={handleDelete}>
                 Delete
               </button>
             </div>
           )}
+
+        </Link>
       </div>
     </li>
   );

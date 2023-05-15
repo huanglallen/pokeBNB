@@ -2,7 +2,9 @@ import SpotIndexItem from "../SpotIndexItem/SpotIndexItem";
 import { fetchSpots } from "../../store/spots";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import './ManageSpots.css';
+
 
 //looks at session.user's spots from profileButton tab
 const ManageSpots = () => {
@@ -15,12 +17,20 @@ const ManageSpots = () => {
         dispatch(fetchSpots());
     }, [dispatch]);
 
+    if(!userId) return null;
+
     return (
-        <>
-        <h2>Manage Your Spots</h2>
-        <Link to='/spots/new' className="create">Create a new Spot</Link>
+        <div className="manageWrapper">
+        <h2 className="manageHead">Manage Your Spots</h2>
+        {!spots && (
+            <div className="createSbutton">
+            <NavLink exact to='/spots/new'>
+                Create a New Spot
+                </NavLink>
+            </div>
+        )}
         <section>
-            <ul>
+            <ul className="manageSpotsWrapper">
                 {spots.map(spot => (
                     <>
                     <SpotIndexItem spot={spot} key={spot.id} />
@@ -28,7 +38,7 @@ const ManageSpots = () => {
                 ))}
             </ul>
         </section>
-        </>
+        </div>
     )
 }
 
