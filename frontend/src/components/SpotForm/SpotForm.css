@@ -1,46 +1,169 @@
-form {
+.FormWrapper {
     display: flex;
     flex-direction: column;
 }
 
-form > * {
-    justify-content: center;
-    width: 45%;
-    margin: 15px;
+h3 {
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+p {
+    padding: 2px 0;
+}
+
+input {
+    outline: none;
+    border: black 2px solid;
+    background-color: #E8f0fe;
+    padding: 5px;
+}
+
+input::placeholder {
+    color: gray;
+}
+
+.formDescription {
+    padding-bottom: 15px;
 }
 
 .countryText {
-    display: flex;
+    font: bold;
+    padding: 5px 0;
+}
+
+.address {
+    padding: 5px 0;
 }
 
 .cityState {
     display: flex;
+    justify-content: space-between;
+    border-bottom: black 2px solid;
+    padding-bottom: 15px;
 }
 
-.cityStateInputs {
+.city {
+    padding: 5px 0;
+}
+
+.cityInput > input {
+    padding-right: 70%;
+}
+
+.state {
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.state > span {
+    padding-top: 2px;
+}
+
+.comma {
+    font-size: 30px;
+    padding-left: 100px;
+    padding-top: 25px;
+}
+
+.descriptionSpotForm {
+    border-bottom: black solid 2px;
+}
+
+.descriptionErr {
+    padding: 12px 0;
+}
+
+.descriptionSpotForm > input {
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.nameBox {
+    border-bottom: black solid 2px;
+}
+
+.nameErr {
+    padding: 10px 0;
+}
+
+.nameBox input {
+    width: 100%;
+}
+
+.nameText {
+    padding-bottom: 10px;
+}
+
+.priceBox {
+    display: flex;
+    flex-direction: column;
+    border-bottom: black solid 2px;
+}
+
+.priceErr {
+    padding: 10px 0;
+}
+
+.priceBox input {
+    width: 97%;
+}
+
+.priceText {
+    padding-bottom: 10px;
+}
+
+.priceInput {
     display: flex;
 }
 
-.description {
+.priceSign {
+    font-size: 20px;
+    padding-top: 2px;
+    padding-right: 10px;
+}
+
+.imageBox {
+    border-bottom: black solid 2px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.imageText {
+    margin-bottom: 10px;
+}
+
+.previewImgBox {
     display: flex;
     flex-direction: column;
 }
 
-.name {
+.pImgErr {
+    padding: 10px 0;
+}
+
+.imgBox {
     display: flex;
     flex-direction: column;
 }
 
-.price {
-    display: flex;
-    flex-direction: column;
+.img1Err, .img2Err, .img3Err, .img4Err {
+    padding: 10px 0;
 }
 
-.image {
-    display: flex;
-    flex-direction: column;
+.error-message {
+    color: red;
+    font-size: 14px;
 }
 
 .submitButton {
-    display: block;
+    background-color: var(--abnb);
+    color: white;
+    border: 2px black solid;
+    box-shadow: 5px 2px 0 black;
+    margin: 5px 0;
+    margin-left: 35%;
+    width: 25%;
+    font-size: 18px;
 }

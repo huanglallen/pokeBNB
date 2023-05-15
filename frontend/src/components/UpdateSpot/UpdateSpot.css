@@ -1,0 +1,9 @@
+.updateSpotForm {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 500px;
+}
+
+.updateHead {
+    padding-bottom: 10px;
+}

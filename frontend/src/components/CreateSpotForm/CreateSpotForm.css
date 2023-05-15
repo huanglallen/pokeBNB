@@ -1,0 +1,9 @@
+.createSpotForm {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 475px;
+}
+
+.formHead {
+    padding-bottom: 10px;
+}

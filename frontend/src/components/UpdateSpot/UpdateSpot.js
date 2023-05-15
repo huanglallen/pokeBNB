@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import "./UpdateSpot.css";
 
 import SpotForm from "../SpotForm/SpotForm";
 import { getSpot } from '../../store/spots';
@@ -19,7 +20,7 @@ const UpdateSpot = () => {
     return (
         Object.keys(spot).length > 1 && (
             <div className="updateSpotForm">
-                <h2>Update your Spot</h2>
+                <h2 className='updateHead'>Update your Spot</h2>
                 <SpotForm spot={spot} formType="Update Spot" />
             </div>
         )
