@@ -21,24 +21,24 @@ const SpotIndexItem = ({ spot }) => {
     e.preventDefault();
     setModalContent(
       <SpotDeleteModal spot={spot}
-        handleDeleteConfirmation={handleDeleteConfirmation}
+      handleDeleteConfirmation={handleDeleteConfirmation}
       />
-    );
-    setShowDeleteModal(true);
-  };
+      );
+      setShowDeleteModal(true);
+    };
 
-  const handleDeleteConfirmation = () => {
-    dispatch(deleteSpot(spot.id));
-    setShowDeleteModal(false);
-    closeModal();
-  };
+    const handleDeleteConfirmation = () => {
+      dispatch(deleteSpot(spot.id));
+      setShowDeleteModal(false);
+      closeModal();
+    };
 
-  const handleDeleteCancel = () => {
-    setShowDeleteModal(false);
-    closeModal();
-  };
+    const handleDeleteCancel = () => {
+      setShowDeleteModal(false);
+      closeModal();
+    };
 
-  if (!spotImg) return null;
+    if (!spot || !spotImg) return null;
 
   return (
     <li>
@@ -46,15 +46,27 @@ const SpotIndexItem = ({ spot }) => {
         <Link to={`/spots/${spot.id}`}>
           <div className="img">
             <img className="spotImg" src={spotImg} alt={`${spot.name}`} />
+            <div className="nametext">
+              <p className="text">{spot.name}</p>
+            </div>
           </div>
-          <div className="spotLocation">
-            {spot.city}, {spot.state}
+          <div className="firstRow">
+            <div className="spotLocation">
+              {spot.city}, {spot.state}
+            </div>
+            <div className="spotRating">
+              <i className="fa-solid fa-star"></i>
+              <div className="ratingNum">
+                {rating ? rating.toFixed(1) : "New"}
+              </div>
+            </div>
           </div>
-          <div className="spotRating">
-            <i className="fa-solid fa-star"></i>
-            {rating ? rating : "New"}
+          <div className="spotPrice">
+            <div className="priceNum">${spot.price}</div>
+            <div className="night">night</div>
           </div>
-          <div className="spotPrice">${spot.price} night</div>
+
+
         </Link>
         {currentUser &&
           location.pathname === "/spots/current" &&

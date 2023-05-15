@@ -3,9 +3,9 @@
 }
 
 #navbar {
+    width: auto;
     display: flex;
     justify-content: space-between;
-    /* width: 100%; */
     height: 70px;
     border-bottom: solid 2px lightgrey;
     padding: 0 10px;
@@ -39,7 +39,7 @@
 }
 
 .CreateSpotButton {
-    margin-left: 620px;
+    margin-left: 900px;
     margin-top: 10px;
     color: teal;
 }

@@ -1,1 +1,53 @@
+.spot {
+    display: flex;
+}
 
+.img {
+    position: relative;
+}
+
+.spotImg {
+    height: 250px;
+    width: 300px;
+}
+
+.firstRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    padding: 5px 0;
+}
+
+.spotRating {
+    display: flex;
+}
+
+.ratingNum {
+    padding-left: 3px;
+}
+
+.spotPrice {
+    display: flex;
+}
+
+.priceNum {
+    font-weight: bold;
+}
+
+.night {
+    padding-left: 5px;
+}
+
+.nametext {
+    font-size: 30px;
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    background-color: darkgrey;
+    color: white;
+    opacity: 0;
+}
+
+.img:hover .nametext {
+    opacity: 1;
+}
