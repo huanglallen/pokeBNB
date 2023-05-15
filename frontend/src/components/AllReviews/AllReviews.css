@@ -1,0 +1,20 @@
+.allReviews {
+    display: flex;
+    flex-direction: column;
+    width: 980px;
+}
+
+.reviewWrapper {
+    margin-bottom: 40px;
+}
+
+.reviewName {
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+.date {
+    color: lightgray;
+    padding-bottom: 5px;
+    font-weight: normal;
+}

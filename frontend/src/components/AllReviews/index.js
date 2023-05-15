@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getReviews } from "../../store/reviews";
+import './AllReviews.css';
 
 const AllReviews = ({ spotId }) => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const AllReviews = ({ spotId }) => {
     return (
         <div className="allReviews">
         {Object.values(reviews).map((review) => (
-            <div className="review" key={review.reviewData.id}>
+            <div className="reviewWrapper" key={review.reviewData.id}>
                 <h3 className="reviewName">{review.User.userData.firstName}</h3>
                 <h4 className="date">{getDate(review.reviewData.updatedAt)}</h4>
                 <p className="description">{review.reviewData.review}</p>
