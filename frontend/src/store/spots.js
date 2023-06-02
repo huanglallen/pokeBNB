@@ -43,6 +43,7 @@ export const getSpot = (spotId) => async dispatch => {
     }
 }
 
+//thunks
 export const createSpot = (spot, spotImages) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
       method: 'POST',
@@ -98,6 +99,8 @@ const initialState = {
     allSpots:{},
     singleSpot: {}
 };
+
+//reducer
 const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_SPOTS:

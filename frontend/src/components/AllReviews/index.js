@@ -9,7 +9,7 @@ const AllReviews = ({ spotId }) => {
     const reviews = useSelector(state => {
         const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
         return filteredReviews;
-      });
+    });
 
     useEffect(() => {
         dispatch(getReviews(spotId));

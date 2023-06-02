@@ -6,7 +6,7 @@ import AllReviews from "../AllReviews";
 import { getReviews } from "../../store/reviews";
 import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
-import CreateReviewForm from "../CreateReview";
+import CreateReviewForm from "../CreateReviewModal";
 import './SpotShow.css';
 
 const SpotShow = () => {
@@ -15,8 +15,17 @@ const SpotShow = () => {
     // console.log('spotshow_spotId', spotId)
     const spot = useSelector(state => state.spots.singleSpot);
     const user = useSelector(state => state.session.user);
+
+    const singleSpotId = useSelector(state => state.spots.singleSpot.id)
+    const reviews = useSelector(state => {
+        const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
+        return filteredReviews;
+    });
+    // const alreadyReviewed = reviews.some(review => review.reviewData.userId === user.id)
+    console.log("SPOTSHOW_REVIEWS", Object.values(reviews))
+
+
     const rating = useSelector(state => state.spots.singleSpot.avgStarRating)
-    // console.log("SPOTSHOW_REVIEWS", reviews)
     const renderImage = (image) => {
         return (
             <img
@@ -37,7 +46,7 @@ const SpotShow = () => {
             setModalContent(<CreateReviewForm  spotId={spotId}/>);
         };
 
-    if(!spot || !spotId || !spot.SpotImages) return null;
+    if(!spot || !spot.SpotImages) return null;
 
     return (
         <div className="spotShow">
@@ -70,7 +79,7 @@ const SpotShow = () => {
                                 <div className="hasReviews">
                                     {Math.round(rating * 10) / 10}
                                     <div className="dot">
-                                        <i class="fa-solid fa-circle"></i>
+                                        <i className="fa-solid fa-circle"></i>
                                     </div>
                                     {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"}
                                 </div>
@@ -107,7 +116,7 @@ const SpotShow = () => {
                         <button className="RevPostButton" onClick={openCreateReviewModal}>Post Your Review</button>
                     </div>
                 )}
-                {spot.numReviews === 0 && (
+                {spot.numReviews === 0 && !(reviews.some(review => review.reviewData.userId === user.id)) (
                     <div className="beFirst">
                     Be the first to post a review!
                     </div>
