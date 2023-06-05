@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MakeReview } from "../../store/reviews";
+import { makeReview } from "../../store/reviews";
 import "./CreateReviewModal.css";
 
 const CreateReviewForm = ({ spotId }) => {
@@ -33,8 +33,7 @@ const CreateReviewForm = ({ spotId }) => {
       stars: activeRating,
     };
 
-    // Dispatch the MakeReview thunk
-    dispatch(MakeReview(spotId, review));
+    dispatch(makeReview(spotId, review));
   };
 
   const isReviewTextValid = reviewText.length >= 10;

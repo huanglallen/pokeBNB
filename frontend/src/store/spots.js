@@ -29,7 +29,6 @@ export const fetchSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
     if(response.ok) {
         const data = await response.json();
-        // console.log('dataThunk', data)
         dispatch(loadSpots(data));
     };
 };

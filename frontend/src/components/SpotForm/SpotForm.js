@@ -24,6 +24,7 @@ const SpotForm = ({ spot, formType}) => {
     const [img2, setImg2] = useState(spot?.img2);
     const [img3, setImg3] = useState(spot?.img3);
     const [img4, setImg4] = useState(spot?.img4);
+
     const ownerId = useSelector(state => state.session.user.id);
 
     const formErrors = {};
@@ -36,16 +37,23 @@ const SpotForm = ({ spot, formType}) => {
             if (!description || description.length <= 30) formErrors.description = 'Description needs a minimum of 30 characters';
             if (!name) formErrors.name = 'Name is required';
             if (!price) formErrors.price = 'Price is required';
+            
             if (!previewImage) formErrors.previewImage = 'Preview image is required';
+            if (previewImage && !previewImage.endsWith('.jpg') && !previewImage.endsWith('.jpeg') && !previewImage.endsWith('.png')) formErrors.previewImage = 'Preview Image URL must end in .png, .jpg, or .jpeg';
             if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img2 && !img2.endsWith('.jpg') && !img2.endsWith('.jpeg') && !img2.endsWith('.png')) formErrors.img2 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img4 && !img4.endsWith('.jpg') && !img4.endsWith('.jpeg') && !img4.endsWith('.png')) formErrors.img4 = 'Image URL must end in .png, .jpg, or .jpeg';
 
+            if(!img1) formErrors.img1 = 'Image is required';
+            if(!img2) formErrors.img2 = 'Image is required';
+            if(!img3) formErrors.img3 = 'Image is required';
+            if(!img4) formErrors.img4 = 'Image is required';
+
             setErrors(formErrors);
         }
 
-    }, [country, address, city, state, description, name, price, previewImage, img1, img2, img3, img4, submitted]);
+    }, [country, address, city, state, description, name, price, previewImage, img1, img2, img3, img4, submitted, spot]);
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -81,7 +89,9 @@ const SpotForm = ({ spot, formType}) => {
     if(!spot) return null;
 
     return (
-        <form  className="FormWrapper" onSubmit={onSubmit}>
+        <form  className="FormWrapper"
+        onSubmit={(e) => onSubmit(e)}
+        >
             <h3>Where's your place located?</h3>
             <p className="formDescription">
                 Guests will only get your exact address once they booked a reservation.

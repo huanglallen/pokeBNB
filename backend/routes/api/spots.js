@@ -64,7 +64,8 @@ router.get('/:spotId/reviews', async (req, res) => {
 
     //error handler
     if(!reviews.length) {
-        return res.status(404).json({message: "Spot couldn't be found"})
+        console.log('backend_REVIEWS')
+        return res.json({Reviews: []})
     };
 
     return res.json({Reviews: reviews});
