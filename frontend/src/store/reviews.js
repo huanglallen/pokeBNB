@@ -20,7 +20,7 @@ export const removeReview = reviewId => ({
 });
 
 export const getReviews = spotId => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${spotId}/reviews`);
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
     if(response.ok) {
         const data = await response.json();
         dispatch(loadReviews(data));
@@ -29,7 +29,7 @@ export const getReviews = spotId => async dispatch => {
 };
 
 export const MakeReview = (spotId, review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${spotId}/reviews`, {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review)

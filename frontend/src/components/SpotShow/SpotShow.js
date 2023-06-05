@@ -12,7 +12,6 @@ import './SpotShow.css';
 const SpotShow = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    // console.log('spotshow_spotId', spotId)
     const spot = useSelector(state => state.spots.singleSpot);
     const user = useSelector(state => state.session.user);
 
@@ -21,9 +20,6 @@ const SpotShow = () => {
         const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
         return filteredReviews;
     });
-    // const alreadyReviewed = reviews.some(review => review.reviewData.userId === user.id)
-    console.log("SPOTSHOW_REVIEWS", Object.values(reviews))
-
 
     const rating = useSelector(state => state.spots.singleSpot.avgStarRating)
     const renderImage = (image) => {
@@ -116,7 +112,9 @@ const SpotShow = () => {
                         <button className="RevPostButton" onClick={openCreateReviewModal}>Post Your Review</button>
                     </div>
                 )}
-                {spot.numReviews === 0 && !(reviews.some(review => review.reviewData.userId === user.id)) (
+                {reviews.length === 0 &&
+                // !(reviews.some(review => review.reviewData.userId === user.id))
+                (
                     <div className="beFirst">
                     Be the first to post a review!
                     </div>
