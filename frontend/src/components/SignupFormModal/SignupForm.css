@@ -1,0 +1,9 @@
+.signupModalWrapper {
+    height: 450px;
+    width: 500px;
+    border-radius: 20px;
+    background-color: #e8f0fe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

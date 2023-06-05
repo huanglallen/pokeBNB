@@ -43,7 +43,6 @@ export const getSpot = (spotId) => async dispatch => {
     }
 }
 
-//thunks
 export const createSpot = (spot, spotImages) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
       method: 'POST',
@@ -73,7 +72,6 @@ export const createSpot = (spot, spotImages) => async dispatch => {
 };
 
 export const editSpot = spot => async dispatch => {
-    // console.log('editspotthunk', spot)
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
