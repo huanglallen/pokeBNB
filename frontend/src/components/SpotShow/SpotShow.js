@@ -52,10 +52,10 @@ const SpotShow = () => {
             </h3>
             <div className="showImgs">
                 <div className="prevImg">
-                    {spot.SpotImages.slice(4, 5).map(renderImage)}
+                    {spot.SpotImages.slice(0, 1).map(renderImage)}
                 </div>
                 <div className="otherImgs">
-                    {spot.SpotImages.slice(0, 4).map(renderImage)}
+                    {spot.SpotImages.slice(1, 5).map(renderImage)}
                 </div>
             </div>
             <div className="info">

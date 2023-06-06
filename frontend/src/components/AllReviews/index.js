@@ -23,7 +23,6 @@ const AllReviews = ({ spotId }) => {
     };
 
     if(!reviews) return null;
-    // const filteredReviews = Object.values(reviews)
 
     return (
         <div className="allReviews">

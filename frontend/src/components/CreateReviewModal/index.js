@@ -5,23 +5,28 @@ import "./CreateReviewModal.css";
 
 const CreateReviewForm = ({ spotId }) => {
   const dispatch = useDispatch();
-  const emptyStar = <i className="fa-thin fa-star"></i>;
+  const emptyStar = <i className="fa-regular fa-star"></i>;
   const filledStar = <i className="fa-solid fa-star"></i>;
   const [activeRating, setActiveRating] = useState(0);
-  const [hoveredRating, setHoveredRating] = useState(0);
+  const [clickedRating, setClickedRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const userId = useSelector((state) => state.session.user.id);
 
+  useEffect(() => {
+    setActiveRating(clickedRating)
+  }, [clickedRating])
+
+
   const handleStarEnter = (rating) => {
-    setHoveredRating(rating);
+    setActiveRating(rating);
   };
 
   const handleStarLeave = () => {
-    setHoveredRating(0);
+    setActiveRating(clickedRating)
   };
 
   const handleStarClick = (rating) => {
-    setActiveRating(rating);
+    setClickedRating(rating);
   };
 
   const handleSubmitReview = () => {
@@ -30,13 +35,11 @@ const CreateReviewForm = ({ spotId }) => {
       userId: userId,
       spotId: spotId,
       review: reviewText,
-      stars: activeRating,
+      stars: clickedRating,
     };
 
     dispatch(makeReview(spotId, review));
   };
-
-  const isReviewTextValid = reviewText.length >= 10;
 
   return (
     <div className="ReviewModalForm">
@@ -47,21 +50,50 @@ const CreateReviewForm = ({ spotId }) => {
         value={reviewText}
         onChange={(e) => setReviewText(e.target.value)}
       />
-      <div className="ratingStars">
-        {[1, 2, 3, 4, 5].map((rating) => (
-          <div
-            key={rating}
-            className={`star ${rating <= (hoveredRating || activeRating) ? "filled" : "empty"}`}
-            onMouseEnter={() => handleStarEnter(rating)}
-            onMouseLeave={handleStarLeave}
-            onClick={() => handleStarClick(rating)}
-          >
-            {rating <= (hoveredRating || activeRating) ? filledStar : emptyStar}
-          </div>
-        ))}
+      <div className="rating-input">
+        <div
+        className=''
+        onMouseEnter={() => handleStarEnter(1)}
+        onMouseLeave={handleStarLeave}
+        onClick={() => handleStarClick(1)}
+        >
+          {activeRating >= 1 ? filledStar : emptyStar}
+        </div>
+        <div
+        className=''
+        onMouseEnter={() => handleStarEnter(2)}
+        onMouseLeave={handleStarLeave}
+        onClick={() => handleStarClick(2)}
+        >
+          {activeRating >= 2 ? filledStar : emptyStar}
+        </div>
+        <div
+        className=''
+        onMouseEnter={() => handleStarEnter(3)}
+        onMouseLeave={handleStarLeave}
+        onClick={() => handleStarClick(3)}
+        >
+          {activeRating >= 3 ? filledStar : emptyStar}
+        </div>
+        <div
+        className=''
+        onMouseEnter={() => handleStarEnter(4)}
+        onMouseLeave={handleStarLeave}
+        onClick={() => handleStarClick(4)}
+        >
+          {activeRating >= 4 ? filledStar : emptyStar}
+        </div>
+        <div
+        className=''
+        onMouseEnter={() => handleStarEnter(5)}
+        onMouseLeave={handleStarLeave}
+        onClick={() => handleStarClick(5)}
+        >
+          {activeRating >= 5 ? filledStar : emptyStar}
+        </div>
       </div>
-      <button className="submitReviewButton" onClick={handleSubmitReview} disabled={!isReviewTextValid}>
-        Submit
+      <button className="submitReviewButton" onClick={handleSubmitReview} disabled={!(reviewText.length >= 10)}>
+        Submit Your Review
       </button>
     </div>
   );
