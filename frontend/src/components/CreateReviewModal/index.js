@@ -10,8 +10,9 @@ const CreateReviewForm = ({ spotId }) => {
   const [activeRating, setActiveRating] = useState(0);
   const [clickedRating, setClickedRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-  const userId = useSelector((state) => state.session.user.id);
 
+  const userId = useSelector(state => state.session.user.id);
+  
   useEffect(() => {
     setActiveRating(clickedRating)
   }, [clickedRating])
@@ -52,7 +53,7 @@ const CreateReviewForm = ({ spotId }) => {
       />
       <div className="rating-input">
         <div
-        className=''
+        className='star'
         onMouseEnter={() => handleStarEnter(1)}
         onMouseLeave={handleStarLeave}
         onClick={() => handleStarClick(1)}
@@ -60,7 +61,7 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 1 ? filledStar : emptyStar}
         </div>
         <div
-        className=''
+        className='star'
         onMouseEnter={() => handleStarEnter(2)}
         onMouseLeave={handleStarLeave}
         onClick={() => handleStarClick(2)}
@@ -68,7 +69,7 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 2 ? filledStar : emptyStar}
         </div>
         <div
-        className=''
+        className='star'
         onMouseEnter={() => handleStarEnter(3)}
         onMouseLeave={handleStarLeave}
         onClick={() => handleStarClick(3)}
@@ -76,7 +77,7 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 3 ? filledStar : emptyStar}
         </div>
         <div
-        className=''
+        className='star'
         onMouseEnter={() => handleStarEnter(4)}
         onMouseLeave={handleStarLeave}
         onClick={() => handleStarClick(4)}
@@ -84,7 +85,7 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 4 ? filledStar : emptyStar}
         </div>
         <div
-        className=''
+        className='star'
         onMouseEnter={() => handleStarEnter(5)}
         onMouseLeave={handleStarLeave}
         onClick={() => handleStarClick(5)}
@@ -92,7 +93,11 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 5 ? filledStar : emptyStar}
         </div>
       </div>
-      <button className="submitReviewButton" onClick={handleSubmitReview} disabled={!(reviewText.length >= 10)}>
+      <button
+      className="submitReviewButton"
+      onClick={handleSubmitReview}
+      disabled={reviewText.length < 10}
+      >
         Submit Your Review
       </button>
     </div>

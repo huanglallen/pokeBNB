@@ -22,7 +22,7 @@ const ManageSpots = () => {
     return (
         <div className="manageWrapper">
         <h2 className="manageHead">Manage Your Spots</h2>
-        {!spots && (
+        {!spots.length && (
             <div className="createSbutton">
             <NavLink exact to='/spots/new'>
                 Create a New Spot
