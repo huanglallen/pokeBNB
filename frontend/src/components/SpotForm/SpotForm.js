@@ -85,7 +85,6 @@ const SpotForm = ({ spot, formType}) => {
             spot = changeSpot;
         };
 
-        console.log("spotForm_error.length:",errors.length)
         if(!Object.keys(errors).length) {
             history.push(`/spots/${spot.id}`);
         };
