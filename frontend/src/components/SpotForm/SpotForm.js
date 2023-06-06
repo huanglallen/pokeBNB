@@ -12,24 +12,25 @@ const SpotForm = ({ spot, formType}) => {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
 
-    const [country, setCountry] = useState(spot?.country);
-    const [address, setAddress] = useState(spot?.address);
-    const [city, setCity] = useState(spot?.city);
-    const [state, setState] = useState(spot?.state);
-    const [description, setDescription] = useState(spot?.description);
-    const [name, setName] = useState(spot?.name);
-    const [price, setPrice] = useState(spot?.price);
-    const [previewImage, setPreviewImg] = useState(spot?.previewImage);
-    const [img1, setImg1] = useState(spot?.img1);
-    const [img2, setImg2] = useState(spot?.img2);
-    const [img3, setImg3] = useState(spot?.img3);
-    const [img4, setImg4] = useState(spot?.img4);
+    const [country, setCountry] = useState(spot?.country || '');
+    const [address, setAddress] = useState(spot?.address || '');
+    const [city, setCity] = useState(spot?.city || '');
+    const [state, setState] = useState(spot?.state || '');
+    const [description, setDescription] = useState(spot?.description || '');
+    const [name, setName] = useState(spot?.name || '');
+    const [price, setPrice] = useState(spot?.price || '');
+    const [previewImage, setPreviewImg] = useState(spot?.previewImage || '');
+    const [img1, setImg1] = useState(spot?.img1 || '');
+    const [img2, setImg2] = useState(spot?.img2 || '');
+    const [img3, setImg3] = useState(spot?.img3 || '');
+    const [img4, setImg4] = useState(spot?.img4 || '');
 
     const ownerId = useSelector(state => state.session.user.id);
 
-    const formErrors = {};
     useEffect(() => {
         if(submitted) {
+            const formErrors = {};
+
             if (!country) formErrors.country = 'Country is required';
             if (!address) formErrors.address = 'Address is required';
             if (!city) formErrors.city = 'City is required';
@@ -37,7 +38,7 @@ const SpotForm = ({ spot, formType}) => {
             if (!description || description.length <= 30) formErrors.description = 'Description needs a minimum of 30 characters';
             if (!name) formErrors.name = 'Name is required';
             if (!price) formErrors.price = 'Price is required';
-            
+
             if (!previewImage) formErrors.previewImage = 'Preview image is required';
             if (previewImage && !previewImage.endsWith('.jpg') && !previewImage.endsWith('.jpeg') && !previewImage.endsWith('.png')) formErrors.previewImage = 'Preview Image URL must end in .png, .jpg, or .jpeg';
             if (img1 && !img1.endsWith('.jpg') && !img1.endsWith('.jpeg') && !img1.endsWith('.png')) formErrors.img1 = 'Image URL must end in .png, .jpg, or .jpeg';
@@ -45,22 +46,26 @@ const SpotForm = ({ spot, formType}) => {
             if (img3 && !img3.endsWith('.jpg') && !img3.endsWith('.jpeg') && !img3.endsWith('.png')) formErrors.img3 = 'Image URL must end in .png, .jpg, or .jpeg';
             if (img4 && !img4.endsWith('.jpg') && !img4.endsWith('.jpeg') && !img4.endsWith('.png')) formErrors.img4 = 'Image URL must end in .png, .jpg, or .jpeg';
 
-            if(!img1) formErrors.img1 = 'Image is required';
-            if(!img2) formErrors.img2 = 'Image is required';
-            if(!img3) formErrors.img3 = 'Image is required';
-            if(!img4) formErrors.img4 = 'Image is required';
+            if (!img1) formErrors.img1 = 'Image is required';
+            if (!img2) formErrors.img2 = 'Image is required';
+            if (!img3) formErrors.img3 = 'Image is required';
+            if (!img4) formErrors.img4 = 'Image is required';
 
+            // if (Object.values(formErrors).length > 0) {
+            //     console.log('SPOT_FORM_validate')
+            //     return setErrors(formErrors);
+            // };
             setErrors(formErrors);
-        }
+        };
 
     }, [country, address, city, state, description, name, price, previewImage, img1, img2, img3, img4, submitted, spot]);
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         setSubmitted(true);
 
         //fill according to backend post req
-        spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1}
+        spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1};
 
         const spotImages = [
             previewImage,
@@ -68,22 +73,22 @@ const SpotForm = ({ spot, formType}) => {
             img2,
             img3,
             img4
-        ]
+        ];
 
         if(formType === "Create Spot") {
             const newSpot = await dispatch(createSpot(spot, spotImages));
             spot = newSpot;
-        }
+        };
+
         if(formType === "Update Spot") {
             const changeSpot = await dispatch(editSpot(spot));
             spot = changeSpot;
-        }
+        };
 
-        if (Object.keys(errors).length > 0) {
-            setErrors(spot.errors);
-        } else {
+        console.log("spotForm_error.length:",errors.length)
+        if(!Object.keys(errors).length) {
             history.push(`/spots/${spot.id}`);
-        }
+        };
     }
 
     if(!spot) return null;
@@ -218,7 +223,11 @@ const SpotForm = ({ spot, formType}) => {
 
                 </div>
             )}
-            <button className="submitButton" type="submit">{formType}</button>
+            <button
+            className="submitButton"
+            type="submit"
+
+            >{formType}</button>
         </form>
     )
 }
