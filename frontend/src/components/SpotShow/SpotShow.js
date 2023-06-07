@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getSpot } from "../../store/spots";
 import AllReviews from "../AllReviews";
 import { getReviews } from "../../store/reviews";
-import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import CreateReviewForm from "../CreateReviewModal";
 import './SpotShow.css';
