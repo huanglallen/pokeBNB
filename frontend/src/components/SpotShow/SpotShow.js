@@ -30,6 +30,7 @@ const SpotShow = () => {
     const renderImage = (image) => {
         return (
             <img
+            key={image.id}
             src={image.url}
             alt=''
             />

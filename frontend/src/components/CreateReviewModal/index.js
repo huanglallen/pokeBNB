@@ -12,11 +12,10 @@ const CreateReviewForm = ({ spotId }) => {
   const [reviewText, setReviewText] = useState("");
 
   const userId = useSelector(state => state.session.user.id);
-  
+
   useEffect(() => {
     setActiveRating(clickedRating)
   }, [clickedRating])
-
 
   const handleStarEnter = (rating) => {
     setActiveRating(rating);

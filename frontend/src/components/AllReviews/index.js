@@ -27,8 +27,8 @@ const AllReviews = ({ spotId }) => {
 
     //modal items
     const { setModalContent } = useModal();
-    const openDeleteReviewModal = () => {
-        setModalContent(<ReviewDeleteModal />)
+    const openDeleteReviewModal = (reviewId) => {
+        setModalContent(<ReviewDeleteModal reviewId={reviewId} />)
     }
 
     if(!reviews) return null;
@@ -39,7 +39,6 @@ const AllReviews = ({ spotId }) => {
             <div
             className="reviewWrapper"
             key={review.reviewData.id}
-            reviewId={review.reviewData.id}
             >
                 <h3 className="reviewName">{review.User.userData.firstName}</h3>
                 <h4 className="date">{getDate(review.reviewData.updatedAt)}</h4>
@@ -48,7 +47,7 @@ const AllReviews = ({ spotId }) => {
                     <div>
                         <button
                         className="DeleteReviewButton"
-                        onClick={openDeleteReviewModal}
+                        onClick={() => openDeleteReviewModal(review.reviewData.id)}
                         >
                             Delete
                         </button>
