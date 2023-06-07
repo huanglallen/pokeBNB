@@ -20,6 +20,12 @@ const SpotShow = () => {
         const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
         return filteredReviews;
     });
+    const userAlreadyPosted = (user, reviews) => {
+        for(let i = 0; i < reviews.length; i++) {
+            if(reviews[i].reviewData.userId === user.id) return true;
+        }
+        return false;
+    };
 
     const rating = useSelector(state => state.spots.singleSpot.avgStarRating)
     const renderImage = (image) => {
@@ -99,7 +105,7 @@ const SpotShow = () => {
                         <div className="hasReviews2">
                             {Math.round(rating * 10) / 10}
                             <div className="resDot">
-                                <i class="fa-solid fa-circle"></i>
+                                <i className="fa-solid fa-circle"></i>
                             </div>
                             <li className="resNum">
                                 {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"}
@@ -107,14 +113,12 @@ const SpotShow = () => {
                         </div>
                     ) : <div className="noReviews2">New</div>}
                 </h2>
-                {user && !(user.id === spot.ownerId) && (
+                {user && !(user.id === spot.ownerId) && !userAlreadyPosted(user, reviews) && (
                     <div className="PostReviewModal">
                         <button className="RevPostButton" onClick={openCreateReviewModal}>Post Your Review</button>
                     </div>
                 )}
-                {reviews.length === 0 &&
-                // !(reviews.some(review => review.reviewData.userId === user.id))
-                (
+                {reviews.length === 0 && (
                     <div className="beFirst">
                     Be the first to post a review!
                     </div>
