@@ -79,7 +79,7 @@ const SpotShow = () => {
                             <i className="fa-solid fa-star"/>
                             {spot.numReviews && spot.numReviews > 0 ? (
                                 <div className="hasReviews">
-                                    {Math.round(rating * 10) / 10}
+                                    {(Math.round(rating * 10) / 10).toFixed(1)}
                                     <div className="dot">
                                         <i className="fa-solid fa-circle"></i>
                                     </div>
@@ -103,7 +103,7 @@ const SpotShow = () => {
                     </div>
                     {spot.numReviews && spot.numReviews > 0 ? (
                         <div className="hasReviews2">
-                            {Math.round(rating * 10) / 10}
+                            {(Math.round(rating * 10) / 10).toFixed(1)}
                             <div className="resDot">
                                 <i className="fa-solid fa-circle"></i>
                             </div>
