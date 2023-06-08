@@ -1,7 +1,7 @@
 import './SpotDeleteModal.css';
 import { useModal } from '../../context/Modal';
 
-const SpotDeleteModal = ({ spot, handleDeleteConfirmation }) => {
+const SpotDeleteModal = ({ handleDeleteConfirmation }) => {
   const { closeModal } = useModal();
 
   //pressing yes

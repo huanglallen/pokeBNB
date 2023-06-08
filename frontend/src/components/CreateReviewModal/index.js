@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeReview } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 import "./CreateReviewModal.css";
 
 const CreateReviewForm = ({ spotId }) => {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
+
   const emptyStar = <i className="fa-regular fa-star"></i>;
   const filledStar = <i className="fa-solid fa-star"></i>;
   const [activeRating, setActiveRating] = useState(0);
@@ -29,8 +32,8 @@ const CreateReviewForm = ({ spotId }) => {
     setClickedRating(rating);
   };
 
-  const handleSubmitReview = () => {
-    // Create the review object based on the active rating and review text
+  const handleSubmitReview = (e) => {
+    e.preventDefault();
     const review = {
       userId: userId,
       spotId: spotId,
@@ -39,6 +42,7 @@ const CreateReviewForm = ({ spotId }) => {
     };
 
     dispatch(makeReview(spotId, review));
+    window.location.reload()
   };
 
   return (
