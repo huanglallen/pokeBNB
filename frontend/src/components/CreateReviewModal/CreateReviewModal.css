@@ -37,3 +37,17 @@
     box-shadow: 5px 5px 1px black;
     background-color: var(--abnb);
 }
+
+.disabledSubmitReviewButton {
+    font-size: 18px;
+    margin: 10px 15px;
+    padding: 15px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: gray;
+}
+
+.submitReviewButton:hover {
+    cursor: pointer;
+}

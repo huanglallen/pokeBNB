@@ -96,6 +96,12 @@ const CreateReviewForm = ({ spotId }) => {
           {activeRating >= 5 ? filledStar : emptyStar}
         </div>
       </div>
+      {reviewText.length < 10 || clickedRating === 0 ?
+      <button
+      className="disabledSubmitReviewButton"
+      disabled={true}
+      >Submit Your Review
+      </button> :
       <button
       className="submitReviewButton"
       onClick={handleSubmitReview}
@@ -103,6 +109,7 @@ const CreateReviewForm = ({ spotId }) => {
       >
         Submit Your Review
       </button>
+      }
     </div>
   );
 };
