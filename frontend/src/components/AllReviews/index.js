@@ -8,7 +8,7 @@ import './AllReviews.css';
 const AllReviews = ({ spotId }) => {
     const dispatch = useDispatch();
     const singleSpotId = useSelector(state => state.spots.singleSpot.id);
-    const currentUserId = useSelector(state => state.session.user.id);
+    const currentUser = useSelector(state => state.session.user);
     const reviews = useSelector((state) => {
         const filteredReviews = Object.values(state.reviews.spot)
             .filter((review) => review.reviewData.spotId === singleSpotId)
@@ -45,7 +45,7 @@ const AllReviews = ({ spotId }) => {
                 <h3 className="reviewName">{review.User.userData.firstName}</h3>
                 <h4 className="date">{getDate(review.reviewData.updatedAt)}</h4>
                 <p className="description">{review.reviewData.review}</p>
-                {currentUserId && currentUserId === review.reviewData.userId && (
+                {currentUser && currentUser.id === review.reviewData.userId && (
                     <div>
                         <button
                         className="DeleteReviewButton"
