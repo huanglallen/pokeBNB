@@ -7,11 +7,12 @@
     border-radius: 50px;
     align-items: center;
     background-color: white;
-    border-color: black;
+    border: 3px black solid;
 }
 
 .profilebutton:hover {
     cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
 }
 
 .iconbars {

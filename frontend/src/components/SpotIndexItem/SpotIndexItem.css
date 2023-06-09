@@ -1,5 +1,11 @@
 .spot {
     display: flex;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+.spot:hover {
+    box-shadow: 5px 5px 5px 5px lightgray;
 }
 
 .img {
@@ -7,8 +13,9 @@
 }
 
 .spotImg {
-    height: 250px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
 }
 
 .firstRow {
@@ -39,11 +46,13 @@
 }
 
 .nametext {
-    font-size: 30px;
+    font-size: 15px;
     position: absolute;
+    padding: 10px;
     top: 1%;
     left: 1%;
-    background-color: darkgrey;
+    border-radius: 15%;
+    background-color: black;
     color: white;
     opacity: 0;
 }

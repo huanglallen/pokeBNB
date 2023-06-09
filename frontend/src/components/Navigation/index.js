@@ -17,18 +17,20 @@ function Navigation({ isLoaded }) {
           </i>
           </NavLink>
         </li>
-        {sessionUser && (
-          <li className="CreateSpotButton">
-            <NavLink exact to='/spots/new'>
-              Create a New Spot
-            </NavLink>
-          </li>
-        )}
-        {isLoaded && (
-          <li className='profileButton'>
-            <ProfileButton user={sessionUser} />
-          </li>
-        )}
+        <li className='navRight'>
+          {sessionUser && (
+            <li className="CreateSpotButton">
+              <NavLink exact to='/spots/new'>
+                Create a New Spot
+              </NavLink>
+            </li>
+          )}
+          {isLoaded && (
+            <li className='profileButton'>
+              <ProfileButton user={sessionUser} />
+            </li>
+          )}
+        </li>
       </ul>
     </nav>
   );

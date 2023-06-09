@@ -10,8 +10,21 @@
     padding: 0 10px;
 }
 
+.navitems {
+    display: flex;
+    width: 100%;
+    font-size: 18px;
+    justify-content: space-between;
+    margin: 15px;
+}
+
 .homeButton {
     color: var(--abnb);
+}
+
+.navRight {
+    display: flex;
+    flex-direction: row;
 }
 
 #abnbIcon {
@@ -26,18 +39,10 @@
     padding-left: 5px;
 }
 
-.navitems {
-    display: flex;
-}
-
-.navitems {
-    font-size: 18px;
-    justify-content: space-between;
-    margin: 15px;
-}
 
 .CreateSpotButton {
-    /* margin-left: 900px; */
     margin-top: 12px;
+    margin-right: 20px;
     color: teal;
+    font-weight: bold;
 }
