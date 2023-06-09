@@ -38,3 +38,18 @@
     box-shadow: 5px 5px 1px black;
     background-color: var(--abnb);
 }
+
+.disabledLoginModalButton {
+    font-size: 18px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: gray;
+}
+
+.loginModalButton:hover {
+    cursor: pointer;
+}

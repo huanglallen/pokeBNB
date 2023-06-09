@@ -9,8 +9,10 @@ const AllReviews = ({ spotId }) => {
     const dispatch = useDispatch();
     const singleSpotId = useSelector(state => state.spots.singleSpot.id);
     const currentUserId = useSelector(state => state.session.user.id);
-    const reviews = useSelector(state => {
-        const filteredReviews = Object.values(state.reviews.spot).filter(review => review.reviewData.spotId === singleSpotId);
+    const reviews = useSelector((state) => {
+        const filteredReviews = Object.values(state.reviews.spot)
+            .filter((review) => review.reviewData.spotId === singleSpotId)
+            .sort((a, b) => new Date(b.reviewData.updatedAt) - new Date(a.reviewData.updatedAt));
         return filteredReviews;
     });
 
