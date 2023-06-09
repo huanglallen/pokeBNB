@@ -26,7 +26,7 @@
 .profile-dropdown {
     display: flex;
     flex-direction: column;
-    border: solid 2px black;
+    border: solid 3px black;
     position: absolute;
     right: 0px;
     padding: 5px 20px;

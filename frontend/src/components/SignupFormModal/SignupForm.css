@@ -27,7 +27,7 @@
 
 .signupForm p {
     padding: 5px;
-    
+    color: red;
 }
 
 .signupModalButton {
@@ -43,8 +43,9 @@
 
 .disabledSignupButton {
     font-size: 18px;
-    margin: 0 20px;
+    margin: 10px 20px;
     margin-bottom: 20px;
+    width: 25rem;
     padding: 20px;
     color: white;
     border: 3px black solid;
