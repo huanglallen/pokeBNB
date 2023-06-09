@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeReview } from "../../store/reviews";
-import { useModal } from "../../context/Modal";
 import "./CreateReviewModal.css";
 
 const CreateReviewForm = ({ spotId }) => {
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
 
   const emptyStar = <i className="fa-regular fa-star"></i>;
   const filledStar = <i className="fa-solid fa-star"></i>;
   const [activeRating, setActiveRating] = useState(0);
   const [clickedRating, setClickedRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [error, setError] = useState("");
 
   const userId = useSelector(state => state.session.user.id);
 
@@ -32,7 +31,7 @@ const CreateReviewForm = ({ spotId }) => {
     setClickedRating(rating);
   };
 
-  const handleSubmitReview = (e) => {
+  const handleSubmitReview = async (e) => {
     e.preventDefault();
     const review = {
       userId: userId,
@@ -41,14 +40,20 @@ const CreateReviewForm = ({ spotId }) => {
       stars: clickedRating,
     };
 
-    dispatch(makeReview(spotId, review));
-    window.location.reload()
+    try {
+      await dispatch(makeReview(spotId, review));
+      window.location.reload()
+    } catch (e) {
+      setError("An Error has occurred. Please try again.")
+    }
   };
 
   return (
     <div className="ReviewModalForm">
       <h2 className="ReviewModalHead">How was your stay?</h2>
+      {error && <p className="postReviewErr">{error}</p>}
       <input
+        className="reviewInput"
         type="text"
         placeholder="Leave your review here..."
         value={reviewText}
@@ -95,6 +100,7 @@ const CreateReviewForm = ({ spotId }) => {
         >
           {activeRating >= 5 ? filledStar : emptyStar}
         </div>
+        <p className="starRatingWord">Stars</p>
       </div>
       {reviewText.length < 10 || clickedRating === 0 ?
       <button

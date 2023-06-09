@@ -51,10 +51,6 @@ const SpotForm = ({ spot, formType}) => {
             if (!img3) formErrors.img3 = 'Image is required';
             if (!img4) formErrors.img4 = 'Image is required';
 
-            // if (Object.values(formErrors).length > 0) {
-            //     console.log('SPOT_FORM_validate')
-            //     return setErrors(formErrors);
-            // };
             setErrors(formErrors);
         };
 
