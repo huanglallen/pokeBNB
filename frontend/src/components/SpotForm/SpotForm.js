@@ -141,7 +141,7 @@ const SpotForm = ({ spot, formType}) => {
             <div className="descriptionSpotForm">
                 <h3>Describe your place to guests</h3>
                 <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                <input
+                <textarea
                 type="text"
                 placeholder="Please write at least 30 characters"
                 value={description}
@@ -166,7 +166,7 @@ const SpotForm = ({ spot, formType}) => {
                 <div className="priceInput">
                     <div className="priceSign">$</div>
                     <input
-                    type="text"
+                    type="number"
                     placeholder="Price per night (USD)"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}/>

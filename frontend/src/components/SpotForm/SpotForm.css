@@ -3,24 +3,20 @@
     flex-direction: column;
 }
 
-h3 {
+.FormWrapper h3 {
     padding: 10px 0;
     font-size: 20px;
 }
 
-p {
+.FormWrapper p {
     padding: 2px 0;
 }
 
-input {
+.FormWrapper input {
     outline: none;
     border: black 2px solid;
     background-color: #E8f0fe;
     padding: 5px;
-}
-
-input::placeholder {
-    color: gray;
 }
 
 .formDescription {

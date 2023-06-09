@@ -3,7 +3,6 @@
 }
 
 #navbar {
-    width: auto;
     display: flex;
     justify-content: space-between;
     height: 80px;
@@ -32,14 +31,13 @@
 }
 
 .navitems {
-    width: 100%;
     font-size: 18px;
     justify-content: space-between;
     margin: 15px;
 }
 
 .CreateSpotButton {
-    margin-left: 900px;
-    margin-top: 10px;
+    /* margin-left: 900px; */
+    margin-top: 12px;
     color: teal;
 }

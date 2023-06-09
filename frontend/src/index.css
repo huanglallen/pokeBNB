@@ -1,6 +1,9 @@
 /* TODO Add site wide styles */
 :root {
-    --abnb: #FF5A5F
+    --abnb: #FF5A5F;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 * {
@@ -18,3 +21,12 @@ li {
 a {
     color: inherit;
 }
+
+input::placeholder {
+    color: gray;
+}
+
+/* .appWrapper {
+    display: flex;
+    flex-direction: column;
+} */
