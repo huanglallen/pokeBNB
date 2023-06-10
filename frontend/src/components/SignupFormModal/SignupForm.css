@@ -39,6 +39,11 @@
     border: 3px black solid;
     box-shadow: 5px 5px 1px black;
     background-color: var(--abnb);
+    width: 25rem;
+}
+
+.signupModalButton:hover {
+    cursor: pointer;
 }
 
 .disabledSignupButton {

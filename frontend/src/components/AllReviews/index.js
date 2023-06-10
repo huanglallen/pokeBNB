@@ -48,7 +48,7 @@ const AllReviews = ({ spotId }) => {
                 {currentUser && currentUser.id === review.reviewData.userId && (
                     <div>
                         <button
-                        className="DeleteReviewButton"
+                        className="deleteReviewButton"
                         onClick={() => openDeleteReviewModal(review.reviewData.id)}
                         >
                             Delete

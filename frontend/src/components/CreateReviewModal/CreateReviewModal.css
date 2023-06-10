@@ -1,7 +1,7 @@
 .ReviewModalForm {
     border: 6px black solid;
-    height: 350px;
-    width: 450px;
+    height: 22rem;
+    width: 28rem;
     border-radius: 20px;
     background-color: #e8f0fe;
     display: flex;
@@ -31,8 +31,10 @@
 
 .reviewInput {
     font-size: 14px;
-    word-wrap: break-word;
-    white-space: pre-wrap;
+    border: 3px black solid;
+    outline: none;
+    margin: 0 1rem;
+    padding-bottom: 6rem;
 }
 
 .rating-input {

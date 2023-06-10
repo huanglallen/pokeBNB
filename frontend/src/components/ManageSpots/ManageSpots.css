@@ -1,11 +1,10 @@
-.manageWrapper {
-    display: flex;
-    flex-direction: column;
+.manageSpotsWrapper > div {
+    height: 20rem;
 }
 
 .manageHead {
     margin: 20px 0;
-    margin-left: 60px;
+    margin-left: 2rem;
     font-size: 24px;
 }
 
@@ -14,10 +13,10 @@
     border: black 2px solid;
     box-shadow: 3px 3px 1px black;
     color: white;
-    background-color: darkgray;
+    background-color: gray;
     padding: 2px 5px;
-    font-size: 18px;
-    width: 180px;
+    font-size: 16px;
+    width: 9.5rem;
 }
 
 .createSbutton:hover {
@@ -25,8 +24,8 @@
 }
 
 .manageSpotsWrapper {
-    padding: 30px 60px;
+    padding: 1.5rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 40px;
+    grid-gap: 1rem;
 }

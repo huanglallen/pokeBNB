@@ -52,7 +52,7 @@ const CreateReviewForm = ({ spotId }) => {
     <div className="ReviewModalForm">
       <h2 className="ReviewModalHead">How was your stay?</h2>
       {error && <p className="postReviewErr">{error}</p>}
-      <input
+      <textarea
         className="reviewInput"
         type="text"
         placeholder="Leave your review here..."

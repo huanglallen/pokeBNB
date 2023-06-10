@@ -18,3 +18,13 @@
     padding-bottom: 5px;
     font-weight: normal;
 }
+
+.deleteReviewButton {
+    border: black 2px solid;
+    box-shadow: 3px 3px 1px black;
+    color: white;
+    background-color: gray;
+    padding: 2px 5px;
+    font-size: 16px;
+    width: 4rem;
+}

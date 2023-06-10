@@ -32,9 +32,9 @@ const ManageSpots = () => {
         <section>
             <ul className="manageSpotsWrapper">
                 {spots.map(spot => (
-                    <>
+                    <div>
                     <SpotIndexItem spot={spot} key={spot.id} />
-                    </>
+                    </div>
                 ))}
             </ul>
         </section>
