@@ -138,10 +138,11 @@ const SpotForm = ({ spot, formType}) => {
                 </div>
             </div>
 
-            <div className="descriptionSpotForm">
+            <div className="descriptionSpotFormWrapper">
                 <h3>Describe your place to guests</h3>
                 <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                 <textarea
+                className="formDescriptionTextarea"
                 type="text"
                 placeholder="Please write at least 30 characters"
                 value={description}
