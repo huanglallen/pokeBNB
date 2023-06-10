@@ -19,6 +19,9 @@ const ReviewDeleteModal = ({ reviewId }) => {
             <h1 className="ReviewDeleteHead">
                 Confirm Delete
             </h1>
+            <h3 className="deleteReviewText" >
+                Are you sure you want to delete this review?
+            </h3>
             <button
             className="confirmReviewDelete"
             onClick={() => deleteAction(reviewId)}

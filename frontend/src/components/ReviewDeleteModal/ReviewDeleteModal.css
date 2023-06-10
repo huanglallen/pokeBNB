@@ -1,0 +1,50 @@
+.ReviewDeleteWrapper {
+    border: 5px black solid;
+    height: 18rem;
+    width: 30rem;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.ReviewDeleteHead {
+    display: flex;
+    justify-content: center;
+    font-weight: normal;
+    font-size: 36px;
+    padding: 10px 0;
+}
+
+.deleteReviewText {
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.confirmReviewDelete {
+    font-size: 18px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: var(--abnb);
+}
+
+.cancelReviewDelete {
+    font-size: 18px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: white;
+    border: 3px black solid;
+    box-shadow: 5px 5px 1px black;
+    background-color: darkgray;
+}
+
+.confirmReviewDelete:hover, .cancelReviewDelete:hover {
+    cursor: pointer;
+}

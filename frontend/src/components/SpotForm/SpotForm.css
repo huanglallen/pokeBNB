@@ -56,6 +56,11 @@
 
 .state {
     padding: 5px 0;
+    display: flex;
+}
+
+.stateHead {
+    padding-right: 5px;
 }
 
 .state > input {

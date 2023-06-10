@@ -27,4 +27,9 @@
     padding: 2px 5px;
     font-size: 16px;
     width: 4rem;
+    margin: 5px;
+}
+
+.deleteReviewButton:hover {
+    cursor: pointer;
 }
