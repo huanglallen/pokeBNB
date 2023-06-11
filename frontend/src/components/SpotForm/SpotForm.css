@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* width: 25rem; */
-    margin: 0 18rem;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .FormWrapper h3 {
@@ -47,7 +47,7 @@
 }
 
 .cityInput > input {
-    padding-right: 70%;
+    padding-right: 100%;
 }
 
 .stateBox {
@@ -73,7 +73,7 @@
 
 .comma {
     font-size: 30px;
-    padding-left: 100px;
+    padding-left: 158px;
     padding-top: 25px;
     margin: 0 1rem;
 }

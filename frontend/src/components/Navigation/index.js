@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
           </i>
           </NavLink>
         </li>
-        <li className='navRight'>
+        <div className='navRight'>
           {sessionUser && (
             <li className="CreateSpotButton">
               <NavLink exact to='/spots/new'>
@@ -30,7 +30,7 @@ function Navigation({ isLoaded }) {
               <ProfileButton user={sessionUser} />
             </li>
           )}
-        </li>
+        </div>
       </ul>
     </nav>
   );

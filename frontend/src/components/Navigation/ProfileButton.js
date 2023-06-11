@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>Hello, {user.username}</li>
+            <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
             <NavLink exact to="/spots/current" className="managespot">Manage Spots</NavLink>
             <li className="logoutWrapper">

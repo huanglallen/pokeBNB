@@ -2,8 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .formHead {
-    margin: 1rem 18rem;
+    margin: 1rem 0;
 }
