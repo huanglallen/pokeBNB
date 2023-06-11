@@ -98,7 +98,7 @@ module.exports = {
     },
     {
       spotId: 4,
-      url: 'https://archives.bulbagarden.net/media/upload/thumb/6/63/Pewter_Gym_Battlefield.png/250px-Pewter_Gym_Battlefield.png',
+      url: 'https://www.serebii.net/anime/pictures/specials/027/DP82.jpg',
       preview: false
     },
     {
@@ -233,7 +233,7 @@ module.exports = {
     },
     {
       spotId: 9,
-      url: 'https://archives.bulbagarden.net/media/upload/thumb/4/4f/Team_Rocket_HQ_anime.png/285px-Team_Rocket_HQ_anime.png',
+      url: 'https://cdn.images.express.co.uk/img/dynamic/143/750x445/1186908.jpg',
       preview: true
     },
     {
@@ -248,7 +248,7 @@ module.exports = {
     },
     {
       spotId: 10,
-      url: 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Viridian_Gym_Battlefield_AG132.png/250px-Viridian_Gym_Battlefield_AG132.png',
+      url: 'https://screenrant.com/wp-content/uploads/Team-Rocket-Giovanni.jpg',
       preview: false
     },
     {
