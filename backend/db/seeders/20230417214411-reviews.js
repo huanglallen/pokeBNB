@@ -12,28 +12,64 @@ module.exports = {
     options.tableName = 'Reviews';
     return queryInterface.bulkInsert(options, [
     {
-      userId: 1,
+      userId: 3,
       spotId: 1,
-      review: "my place is the bestest",
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
       stars: 5
     },
     {
-      userId: 2,
+      userId: 8,
       spotId: 1,
-      review: 'thought it was ok',
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
       stars: 2
     },
     {
-      userId: 3,
-      spotId: 2,
-      review: "it sucked",
+      userId: 9,
+      spotId: 1,
+      review: "it sucked!! DONT COME HERE",
       stars: 1
     },
     {
-      userId: 1,
-      spotId: 4,
-      review: "love the music here",
+      userId: 6,
+      spotId: 1,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
       stars: 4
+    },
+    {
+      userId: 4,
+      spotId: 2,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 5
+    },
+    {
+      userId: 5,
+      spotId: 2,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 4
+    },
+    {
+      userId: 5,
+      spotId: 3,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 2
+    },
+    {
+      userId: 6,
+      spotId: 3,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 4
+    },
+    {
+      userId: 8,
+      spotId: 4,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 2
+    },
+    {
+      userId: 7,
+      spotId: 4,
+      review: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...",
+      stars: 3
     }
    ], {});
   },
@@ -42,7 +78,7 @@ module.exports = {
     options.tableName = 'Reviews';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 4] }
+      spotId: { [Op.in]: [1, 2, 3, 4] }
     }, {});
   }
 };
