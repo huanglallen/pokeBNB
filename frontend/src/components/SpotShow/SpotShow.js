@@ -118,7 +118,7 @@ const SpotShow = () => {
                         <button className="RevPostButton" onClick={openCreateReviewModal}>Post Your Review</button>
                     </div>
                 )}
-                {reviews.length === 0 && user.id !== spot.ownerId && (
+                {reviews.length === 0 && user && user.id !== spot.ownerId && (
                     <div className="beFirst">
                     Be the first to post a review!
                     </div>
