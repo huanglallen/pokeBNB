@@ -1,8 +1,9 @@
 .spot {
     display: flex;
+    flex-direction: column;
     padding: 10px;
     border-radius: 5%;
-    /* height: 18rem; */
+    /* height: 16rem; */
 }
 
 .spot:hover {
@@ -11,11 +12,14 @@
 
 .img {
     position: relative;
+    width: 100%;
+    height: 10rem;
 }
 
 .spotImg {
     height: 100%;
     width: 100%;
+    object-fit: cover;
     border-radius: 5%;
 }
 
@@ -27,6 +31,7 @@
 
 .spotRating {
     display: flex;
+    align-items: center;
 }
 
 .ratingNum {
@@ -35,6 +40,7 @@
 
 .spotPrice {
     display: flex;
+    align-items: center;
 }
 
 .priceNum {

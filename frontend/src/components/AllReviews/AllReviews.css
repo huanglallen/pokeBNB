@@ -1,7 +1,6 @@
 .allReviews {
     display: flex;
     flex-direction: column;
-    width: 980px;
 }
 
 .reviewWrapper {
