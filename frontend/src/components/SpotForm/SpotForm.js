@@ -60,7 +60,6 @@ const SpotForm = ({ spot, formType}) => {
         e.preventDefault();
         setSubmitted(true);
 
-
         //fill according to backend post req
         let updatedSpot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1};
 

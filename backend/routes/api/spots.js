@@ -446,7 +446,7 @@ router.post('/', requireAuth, async (req, res) => {
     if (!price || price < 1) errors.price = "Price per day is required";
 
     if (Object.keys(errors).length > 0) {
-        return res.status(400).json({
+        return res.status(500).json({
             message: "Bad Request",
             errors
         });
