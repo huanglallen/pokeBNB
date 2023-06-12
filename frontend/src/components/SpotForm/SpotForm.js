@@ -11,6 +11,7 @@ const SpotForm = ({ spot, formType}) => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false); //
 
     const [country, setCountry] = useState(spot?.country || '');
     const [address, setAddress] = useState(spot?.address || '');
@@ -58,7 +59,10 @@ const SpotForm = ({ spot, formType}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmitting) return; //
+        setIsSubmitting(true) //
         setSubmitted(true);
+
 
         //fill according to backend post req
         let updatedSpot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1};
