@@ -15,7 +15,7 @@ const UpdateSpot = () => {
         dispatch(getSpot(spotId));
     }, [dispatch, spotId]);
 
-    if(!spot) return;
+    if(!spot || !spotId) return;
 
     return (
         Object.keys(spot).length > 1 && (
