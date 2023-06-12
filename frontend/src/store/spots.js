@@ -34,7 +34,6 @@ export const fetchSpots = () => async dispatch => {
 };
 
 export const getSpot = (spotId) => async dispatch => {
-    // console.log('getSpotTHUNK_spotId', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if(response.ok) {
         const data = await response.json();

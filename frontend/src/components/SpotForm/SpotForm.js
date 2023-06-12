@@ -61,7 +61,7 @@ const SpotForm = ({ spot, formType}) => {
         setSubmitted(true);
 
         //fill according to backend post req
-        spot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1};
+        let updatedSpot = { ...spot, ownerId, country, address, city, state, description, name, price, lat: 1, lng: 1};
 
         const spotImages = [
             previewImage,
@@ -72,17 +72,17 @@ const SpotForm = ({ spot, formType}) => {
         ];
 
         if(formType === "Create Spot") {
-            const newSpot = await dispatch(createSpot(spot, spotImages));
-            spot = newSpot;
+            const newSpot = await dispatch(createSpot(updatedSpot, spotImages));
+            updatedSpot = newSpot;
         };
 
         if(formType === "Update Spot") {
-            const changeSpot = await dispatch(editSpot(spot));
-            spot = changeSpot;
+            const changeSpot = await dispatch(editSpot(updatedSpot));
+            updatedSpot = changeSpot;
         };
 
         if(!Object.keys(errors).length) {
-            history.push(`/spots/${spot.id}`);
+            history.push(`/spots/${updatedSpot.id}`);
         };
     }
 
