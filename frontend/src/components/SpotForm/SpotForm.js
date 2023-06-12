@@ -59,7 +59,7 @@ const SpotForm = ({ spot, formType}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (isSubmitting) return; //
+        if (isSubmitting && !Object.keys(errors).length && !errors.previewImage && !errors.img1 && !errors.img2 && !errors.img3 && !errors.img4) return; //
         setIsSubmitting(true) //
         setSubmitted(true);
 
