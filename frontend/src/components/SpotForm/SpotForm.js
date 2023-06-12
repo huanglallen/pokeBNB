@@ -74,14 +74,12 @@ const SpotForm = ({ spot, formType}) => {
         if(formType === "Create Spot") {
             const newSpot = await dispatch(createSpot(updatedSpot, spotImages));
             updatedSpot = newSpot;
-        };
-
-        if(formType === "Update Spot") {
+        } else if(formType === "Update Spot") {
             const changeSpot = await dispatch(editSpot(updatedSpot));
             updatedSpot = changeSpot;
         };
 
-        if(!Object.keys(errors).length) {
+        if(!Object.keys(errors).length && !errors.previewImage && !errors.img1 && !errors.img2 && !errors.img3 && !errors.img4) {
             history.push(`/spots/${updatedSpot.id}`);
         };
     }
