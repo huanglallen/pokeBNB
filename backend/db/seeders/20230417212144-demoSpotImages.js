@@ -268,17 +268,17 @@ module.exports = {
     },
     {
       spotId: 11,
-      url: 'https://archives.bulbagarden.net/media/upload/thumb/a/a0/Lake_Rage_anime.png/220px-Lake_Rage_anime.png',
+      url: 'https://i.ytimg.com/vi/hlh4jKv184E/maxresdefault.jpg',
       preview: false
     },
     {
       spotId: 11,
-      url: 'https://archives.bulbagarden.net/media/upload/thumb/0/0c/Lake_of_Rage_PG.png/250px-Lake_of_Rage_PG.png',
+      url: 'https://i.pinimg.com/originals/69/26/62/6926623237edf2261c30351e23d78402.jpg',
       preview: false
     },
     {
       spotId: 11,
-      url: 'https://archives.bulbagarden.net/media/upload/0/0e/Lake_of_Rage_Red_Gyarados_GSC.png',
+      url: 'https://cdnb.artstation.com/p/assets/images/images/049/296/931/large/luderick-grumeau-colere-1-vrai.jpg',
       preview: false
     },
     {
@@ -289,22 +289,22 @@ module.exports = {
     {
       spotId: 12,
       url: 'https://modernpaintbynumbers.com/wp-content/uploads/2021/10/Mew-Pokemon-Art-paint-by-numbers-500x400.jpg',
-      preview: true
+      preview: false
     },
     {
       spotId: 12,
       url: 'https://modernpaintbynumbers.com/wp-content/uploads/2021/10/Mew-Pokemon-Art-paint-by-numbers-500x400.jpg',
-      preview: true
+      preview: false
     },
     {
       spotId: 12,
       url: 'https://modernpaintbynumbers.com/wp-content/uploads/2021/10/Mew-Pokemon-Art-paint-by-numbers-500x400.jpg',
-      preview: true
+      preview: false
     },
     {
       spotId: 12,
       url: 'https://modernpaintbynumbers.com/wp-content/uploads/2021/10/Mew-Pokemon-Art-paint-by-numbers-500x400.jpg',
-      preview: true
+      preview: false
     },
     {
       spotId: 12,
@@ -314,22 +314,22 @@ module.exports = {
     {
       spotId: 13,
       url: 'https://cdn.vox-cdn.com/thumbor/YbWDc9vizeAveTTNAKYPivK3NMc=/1400x1050/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/7422969/Ditto_Number_1.png',
-      preview: true
+      preview: false
     },
     {
       spotId: 13,
       url: 'https://i.pinimg.com/originals/2e/f7/9d/2ef79d4b95a6d408e2f809f5d22b79b9.jpg',
-      preview: true
+      preview: false
     },
     {
       spotId: 13,
       url: 'https://images4.wikia.nocookie.net/__cb20130204042255/es.pokemon/images/a/ae/EP672_Guarder%C3%ADa_Pok%C3%A9mon_(2).png',
-      preview: true
+      preview: false
     },
     {
       spotId: 13,
       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ60-3J8ZGajMULR6hph-FRHvTElDSdvy0K7Q&usqp=CAU',
-      preview: true
+      preview: false
     },
     {
       spotId: 13,
