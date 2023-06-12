@@ -32,8 +32,8 @@ const ManageSpots = () => {
         <section>
             <ul className="manageSpotsWrapper">
                 {spots.map(spot => (
-                    <div>
-                    <SpotIndexItem spot={spot} key={spot.id} />
+                    <div key={spot.id}>
+                    <SpotIndexItem spot={spot} />
                     </div>
                 ))}
             </ul>

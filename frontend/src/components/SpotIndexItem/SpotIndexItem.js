@@ -1,8 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { deleteSpot } from "../../store/spots";
-import { Modal, useModal } from "../../context/Modal";
+import { useModal } from "../../context/Modal";
 import SpotDeleteModal from "../SpotDeleteModal";
 import "./SpotIndexItem.css";
 
@@ -15,7 +14,6 @@ const SpotIndexItem = ({ spot }) => {
 
   //modal variables
   const { setModalContent, closeModal } = useModal();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -24,19 +22,13 @@ const SpotIndexItem = ({ spot }) => {
       handleDeleteConfirmation={handleDeleteConfirmation}
       />
       );
-      setShowDeleteModal(true);
     };
 
     const handleDeleteConfirmation = () => {
       dispatch(deleteSpot(spot.id));
-      setShowDeleteModal(false);
       closeModal();
     };
 
-    const handleDeleteCancel = () => {
-      setShowDeleteModal(false);
-      closeModal();
-    };
 
     if (!spot || !spotImg) return null;
 
@@ -70,7 +62,7 @@ const SpotIndexItem = ({ spot }) => {
           location.pathname === "/spots/current" &&
           currentUser.id === spot.ownerId && (
             <div className="spotButtons">
-              <Link exact to={`/spots/${spot.id}/edit`} className="updateButton">
+              <Link to={`/spots/${spot.id}/edit`} className="updateButton">
                 Update
               </Link>
               <button className="deleteButton" onClick={handleDelete}>
