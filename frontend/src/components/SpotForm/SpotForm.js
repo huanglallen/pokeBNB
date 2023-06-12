@@ -11,7 +11,6 @@ const SpotForm = ({ spot, formType}) => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false); //
 
     const [country, setCountry] = useState(spot?.country || '');
     const [address, setAddress] = useState(spot?.address || '');
@@ -59,8 +58,6 @@ const SpotForm = ({ spot, formType}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (isSubmitting && !Object.keys(errors).length && !errors.previewImage && !errors.img1 && !errors.img2 && !errors.img3 && !errors.img4) return; //
-        setIsSubmitting(true) //
         setSubmitted(true);
 
 
@@ -83,7 +80,7 @@ const SpotForm = ({ spot, formType}) => {
             updatedSpot = changeSpot;
         };
 
-        if(!Object.keys(errors).length && !errors.previewImage && !errors.img1 && !errors.img2 && !errors.img3 && !errors.img4) {
+        if(Object.keys(errors).length === 0) {
             history.push(`/spots/${updatedSpot.id}`);
         };
     }
