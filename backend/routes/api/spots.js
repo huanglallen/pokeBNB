@@ -515,6 +515,7 @@ router.put('/:spotId', requireAuth, async (req, res) => {
     const updatedSpot = {
         address,
         city,
+        country,
         state,
         lat,
         lng,
