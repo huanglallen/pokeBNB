@@ -292,7 +292,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         return res.status(403).json({ message: "Only the owner can add images to this spot" });
     };
     if(!url) {
-        return res.status(404).json({ message: "Image is required"})
+        return res.status(500).json({ message: "Image is required"})
     };
     if(url && !url.endsWith('.jpg') && !url.endsWith('.jpeg') && !url.endsWith('.png')) {
         return res.status(500).json({ message: "Image URL must end in .png, .jpg, or .jpeg"})

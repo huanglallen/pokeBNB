@@ -5,11 +5,11 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { Route } from "react-router-dom";
 
-import SpotIndex from "./components/SpotIndex/SpotIndex";
-import SpotShow from "./components/SpotShow/SpotShow";
-import CreateSpotForm from "./components/CreateSpotForm/CreateSpotForm";
-import ManageSpots from "./components/ManageSpots/ManageSpots";
-import UpdateSpot from "./components/UpdateSpot/UpdateSpot";
+import SpotIndex from "./components/SpotIndex";
+import SpotShow from "./components/SpotShow";
+import CreateSpotForm from "./components/CreateSpotForm";
+import ManageSpots from "./components/ManageSpots";
+import UpdateSpot from "./components/UpdateSpot";
 
 function App() {
   const dispatch = useDispatch();

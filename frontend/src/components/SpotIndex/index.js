@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSpots } from '../../store/spots';
-import SpotIndexItem from '../SpotIndexItem/SpotIndexItem';
+import SpotIndexItem from '../SpotIndexItem';
 import './SpotIndex.css'
 
 //displays all spots into homepage

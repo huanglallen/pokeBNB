@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./UpdateSpot.css";
 
-import SpotForm from "../SpotForm/SpotForm";
+import SpotForm from "../SpotForm";
 import { getSpot } from '../../store/spots';
 
 const UpdateSpot = () => {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import { createSpot, editSpot } from "../../store/spots";
-import './SpotForm.css'
+import './SpotForm.css';
 
 //form used by CreateSpot and UpdateSpot
 const SpotForm = ({ spot, formType}) => {

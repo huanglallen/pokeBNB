@@ -1,4 +1,4 @@
-import SpotIndexItem from "../SpotIndexItem/SpotIndexItem";
+import SpotIndexItem from "../SpotIndexItem";
 import { fetchSpots } from "../../store/spots";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
